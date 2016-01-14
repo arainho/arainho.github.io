@@ -2,10 +2,11 @@
 
 I want to clone a VM from OpenStack to a physical CompatFlash attached on my workstation in my private network.
 
-In case of some public networks or internet use "ssh + dd" as described here in [NDCHost Wiki] i use netcat because is faster ;-)
+In case of some public networks or internet use "ssh + dd" as described here in [NDCHost Wiki],
+i use netcat because is faster ;-)
 
-### A warning !
-Be extremly careful with dd, and triple check your devices names /dev/sdx  "!!!"
+### A warning !!
+Be extremly careful with dd, and triple check your devices names /dev/sdx  !!
 
 ### 1. On workstation
 Go to your workstation and run this, sdf is the destination disk
@@ -25,6 +26,6 @@ Usualy i would use screen or tmux on each machine like this, and after detach sc
 
 
 ---
-[NDCHost Wiki] <https://www.ndchost.com/wiki/server-administration/netcat-over-ssh>
+[NDCHost Wiki]: <https://www.ndchost.com/wiki/server-administration/netcat-over-ssh>
 
 
