@@ -1,0 +1,15 @@
+- hosts: all
+  gather_facts: yes
+  
+  tasks:
+    - name: Update OpenSSH (Debian+Ubuntu)
+      apt: name={{ item }}
+           state=latest
+           update_cache=yes
+      with_items:
+        - openssh-server
+        - openssh-client
+
+  post_tasks:
+    - name: Check Restart
+      command: checkrestart
