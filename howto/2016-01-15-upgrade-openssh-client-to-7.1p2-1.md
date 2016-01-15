@@ -66,7 +66,7 @@ Try manually installing OpenSSH client with dpkg
     ~# dpkg -i /var/apt/cache/openssh-client*.deb
 
     
-### 5. Upgrade OpenSSH Client via Ansiblehttps://www.digitalocean.com/community/questions/openssh-client-bug-cve-2016-0777-and-cve-2016-0778
+### 5. Upgrade OpenSSH Client via Ansible
 Create a playbook named openssh.yml and run ansible-playbook to update Package on all Debian and Ubuntu nodes
 
     ~# cat openssh.yml
