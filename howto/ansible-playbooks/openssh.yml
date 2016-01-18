@@ -20,6 +20,13 @@
         - openssh-server
       when: ansible_os_family == "RedHat"
 
+    - name: Disable UseRoaming
+      lineinfile: 
+        dest=/etc/ssh/ssh_config
+        line="UseRoaming no"
+        state=present
+        insertafter=EOF
+
   post_tasks:
     - name: Check Restart
       command: checkrestart
