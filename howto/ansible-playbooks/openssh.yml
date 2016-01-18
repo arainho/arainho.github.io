@@ -2,13 +2,23 @@
   gather_facts: yes
   
   tasks:
-    - name: Update OpenSSH (Debian+Ubuntu)
+    - name: Update OpenSSH (Debian/Ubuntu)
       apt: name={{ item }}
            state=latest
            update_cache=yes
       with_items:
-        - openssh-server
         - openssh-client
+        - openssh-server
+      when: ansible_os_family == "Debian"
+
+    - name: Update OpenSSH (RedHat/CentOS)
+      yum: name={{ item }}
+           state=latest
+           update_cache=yes
+      with_items:
+        - openssh-client
+        - openssh-server
+      when: ansible_os_family == "RedHat"
 
   post_tasks:
     - name: Check Restart
