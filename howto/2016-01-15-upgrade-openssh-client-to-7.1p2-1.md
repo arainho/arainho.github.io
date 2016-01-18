@@ -63,7 +63,7 @@ Fix debconf installation first, in my case debconf version is 1.5.49
 ### 4.3 Or in last case try a manual install 
 Try manually installing OpenSSH client with dpkg
 
-    ~# dpkg -i /var/apt/cache/openssh-client*.deb
+    ~# dpkg -i /var/cache/apt/archives/openssh-client*.deb
 
     
 ### 5. Upgrade OpenSSH Client via Ansible
