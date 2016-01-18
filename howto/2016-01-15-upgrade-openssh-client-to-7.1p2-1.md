@@ -1,7 +1,7 @@
 # Update OpenSSH Client to version 7.1p2-1
 
 Do to bugs CVE-2016-0777, CVE-2016-0778 with need to upgrade our OpenSSH Client on all machines to version 7.1p2-1,
-or add the line "UseRoaming no" to OpenSSH Client config files. you can check details here [digitalocean]
+or add the line "UseRoaming no" to OpenSSH Client config files. you can check details here [cyberciti.biz] or [digitalocean] 
 
 
 ### 1. On Linux and FreeBSD
@@ -93,5 +93,5 @@ Create a playbook named openssh.yml and run ansible-playbook to update Package o
 
     ~# ansible-playbook -i ansible_hosts openssh.yml
 
-    
+[cyberciti.biz]: <http://www.cyberciti.biz/faq/howto-openssh-client-security-update-cve-0216-0777-cve-0216-0778/>
 [digitalocean]: <https://www.digitalocean.com/community/questions/openssh-client-bug-cve-2016-0777-and-cve-2016-0778>
