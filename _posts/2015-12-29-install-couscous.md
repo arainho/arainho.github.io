@@ -28,11 +28,16 @@ see more here. [couscous]
 ### After set up a global install of Composer just run:
 
 	~$ composer global require couscous/couscous
+	~$ export PATH=~/.composer/vendor/bin:$PATH
 
 ### Preview let´s just run:
 
 	~$ couscous preview
+	   .... php 5.4 or above is required to run the internal webserver
 
+### Let´s install PHP version 5.4 or above
+
+	~$ brew install php54
 
 ---
 [couscous]: <http://couscous.io>
