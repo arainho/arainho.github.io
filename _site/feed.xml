@@ -1,0 +1,612 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>arainho Blog</title>
+    <description>• find new solutions ! 
+</description>
+    <link>http://arainho.github.io/</link>
+    <atom:link href="http://arainho.github.io/feed.xml" rel="self" type="application/rss+xml"/>
+    <pubDate>Thu, 21 Jan 2016 18:12:24 +0000</pubDate>
+    <lastBuildDate>Thu, 21 Jan 2016 18:12:24 +0000</lastBuildDate>
+    <generator>Jekyll v2.5.3</generator>
+    
+      <item>
+        <title>Nfs Server Lockd Timeout Debian</title>
+        <description>&lt;h1 id=&quot;problem-with-nfs-server-lockd-timed-out-on-debian-linux&quot;&gt;Problem with NFS server lockd timed out on Debian linux&lt;/h1&gt;
+
+&lt;pre&gt;&lt;code&gt;~# dmesg -T
+
+    [Tue Jan 19 13:58:49 2016] statd: server rpc.statd not responding, timed out
+    [Tue Jan 19 13:58:49 2016] lockd: cannot monitor koios
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&quot;possible-solution&quot;&gt;Possible solution&lt;/h2&gt;
+&lt;p&gt;I found the answer to this on &lt;a href=&quot;http://serverfault.com/questions/188918/problem-with-nfs-server-lockd-timing-out-on-debian-linux&quot;&gt;serverfault&lt;/a&gt;, in Debian/Ubuntu the commands would be:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;~# service nfs-kernel-server stop
+~# service rpcbind stop
+~# service nfs-common stop
+~# service rpcbind start
+~# service nfs-common start
+~# service nfs-kernel-server start
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&quot;debug&quot;&gt;DEBUG&lt;/h2&gt;
+&lt;p&gt;I use rpcdebug to dedug rpc, i found a lot of information on [archlinux wiki]&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;~$ rpcdebug -vh
+
+    usage: rpcdebug [-v] [-h] [-m module] [-s flags...|-c flags...]
+           set or cancel debug flags.
+    
+    Module     Valid flags
+    rpc        xprt call debug nfs auth bind sched trans svcsock svcdsp misc cache all
+    nfs        vfs dircache lookupcache pagecache proc xdr file root callback client mount all
+    nfsd       sock fh export svc proc fileop auth repcache xdr lockd all
+    nlm        svc client clntlock svclock monitor clntsubs svcsubs hostcache xdr all
+
+Examples:
+
+    $ rpcdebug -m nfsd -s proc
+    nfsd proc
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;hr /&gt;
+
+</description>
+        <pubDate>Tue, 19 Jan 2016 00:00:00 +0000</pubDate>
+        <link>http://arainho.github.io/2016/01/19/nfs-server-lockd-timeout-debian.html</link>
+        <guid isPermaLink="true">http://arainho.github.io/2016/01/19/nfs-server-lockd-timeout-debian.html</guid>
+        
+        
+      </item>
+    
+      <item>
+        <title>Mysql Respawning To Fast</title>
+        <description>&lt;h1 id=&quot;cant-start-mysql---mysql-respawning-too-fast-stopped&quot;&gt;Can’t start mysql - mysql respawning too fast, stopped&lt;/h1&gt;
+&lt;p&gt;I can’t start mysql, so i dig in some blog’s and forums like &lt;a href=&quot;https://blogs.oracle.com/jsmyth/entry/apparmor_and_mysql&quot;&gt;blogs oracle&lt;/a&gt;, &lt;a href=&quot;http://askubuntu.com/questions/127264/cant-start-mysql-mysql-respawning-too-fast-stopped&quot;&gt;ask ubuntu&lt;/a&gt;, &lt;a href=&quot;https://bugs.launchpad.net/ubuntu/+source/mysql-5.5/+bug/970366&quot;&gt;launchpad bugs&lt;/a&gt; and finally i found out that the issue was configuration lines inside my.cnf config file on VM.&lt;/p&gt;
+
+&lt;h3 id=&quot;start-wathing-dmesg-and-syslog&quot;&gt;Start wathing dmesg and syslog:&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt;~# dmesg -l warn -T
+
+[Tue Jan 19 15:03:35 2016] init: mysql post-start process (1569) terminated with status 1
+[Tue Jan 19 15:03:36 2016] init: mysql main process (1626) terminated with status 2
+[Tue Jan 19 15:03:36 2016] init: mysql respawning too fast, stopped
+
+
+
+~# tail /var/log/syslog
+
+Jan 19 15:03:35 io kernel: [2512905.106158] type=1400 audit(1453215815.892:27): apparmor=&quot;STATUS&quot; operation=&quot;profile_replace&quot; name=&quot;/usr/sbin/mysqld&quot; pid=1614 comm=&quot;apparmor_parser&quot;
+Jan 19 15:03:37 io kernel: [2512906.533900] init: mysql main process (1626) terminated with status 2
+Jan 19 15:03:37 io kernel: [2512906.533929] init: mysql respawning too fast, stopped
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&quot;check-apparmor&quot;&gt;Check AppArmor&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt;~# /etc/init.d/apparmor status
+
+    apparmor module is loaded.
+    6 profiles are loaded.
+    6 profiles are in enforce mode.
+       /sbin/dhclient
+       /usr/lib/NetworkManager/nm-dhcp-client.action
+       /usr/lib/connman/scripts/dhclient-script
+       /usr/sbin/mysqld
+       /usr/sbin/ntpd
+       /usr/sbin/tcpdump
+    0 profiles are in complain mode.
+    2 processes have profiles defined.
+    2 processes are in enforce mode.
+       /sbin/dhclient (567) 
+       /usr/sbin/ntpd (18274) 
+    0 processes are in complain mode.
+    0 processes are unconfined but have a profile defined.
+
+
+    ~# apt-get install apparmor-utils
+    
+    ~# cat /sys/kernel/security/apparmor/profiles
+
+            /usr/sbin/mysqld (enforce)
+            /usr/sbin/tcpdump (enforce)
+            /usr/sbin/ntpd (enforce)
+            /usr/lib/connman/scripts/dhclient-script (enforce)
+            /usr/lib/NetworkManager/nm-dhcp-client.action (enforce)
+            /sbin/dhclient (enforce)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&quot;to-disable-a-profile-called-mysql-ie-disable-apparmore-protection-for-mysql-server-enter&quot;&gt;To disable a profile called mysql i.e. disable apparmore protection for mysql server, enter:&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt;    ~# ln -s /etc/apparmor.d/usr.sbin.mysqld /etc/apparmor.d/disable/
+    ~# apparmor_parser -R /etc/apparmor.d/usr.sbin.mysqld
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&quot;check-your-config-file&quot;&gt;Check your config file&lt;/h3&gt;
+&lt;p&gt;We have innodb_buffer_pool_size and key_buffer_size without the equal sign,&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;    ~# egrep &quot;(key_buffer_size|innodb_buffer_pool_size)&quot;  /etc/mysql/my.cnf
+
+        key_buffer_size 64M
+        innodb_buffer_pool_size 256M
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;After changing that mysqld starts working.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;    ~# egrep -v &quot;(\#|^$)&quot;  /etc/mysql/my.cnf  | grep &quot;_buffer_&quot;
+
+        key_buffer_size = 64M
+        innodb_buffer_pool_size = 256M
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&quot;finally-mysql-daemon-starts&quot;&gt;Finally MySQL daemon starts&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt;    ~# service mysql restart
+
+        stop: Unknown instance: 
+        mysql start/running, process 9000
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&quot;enable-apparmor-for-mysql&quot;&gt;Enable AppArmor for MySQL&lt;/h3&gt;
+&lt;p&gt;I turn on (enable) apparmor protection for mysql again?
+Type the following commands:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;    ~# rm /etc/apparmor.d/disable/usr.sbin.mysqld
+    ~# apparmor_parser -r /etc/apparmor.d/usr.sbin.mysqld
+    ~# aa-status
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&quot;restart-mysql-daemon&quot;&gt;Restart MySQL daemon&lt;/h3&gt;
+&lt;p&gt;Stop and Start MySQL daemon again&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;    ~# service mysql stop
+
+        mysql stop/waiting
+
+    ~# service mysql start
+        
+        mysql start/running, process 9330
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;hr /&gt;
+
+</description>
+        <pubDate>Tue, 19 Jan 2016 00:00:00 +0000</pubDate>
+        <link>http://arainho.github.io/2016/01/19/mysql-respawning-to-fast.html</link>
+        <guid isPermaLink="true">http://arainho.github.io/2016/01/19/mysql-respawning-to-fast.html</guid>
+        
+        
+      </item>
+    
+      <item>
+        <title>Ansible No Inventory File Just Host Directly</title>
+        <description>&lt;h1 id=&quot;run-ansible-without-inventory-file&quot;&gt;Run Ansible without inventory file&lt;/h1&gt;
+&lt;p&gt;I want to run Ansible without specifying the inventory file through (ANSIBLE_HOST)
+The trick is to append a , after the hostname.&lt;/p&gt;
+
+&lt;h4 id=&quot;host-and-ip-address&quot;&gt;Host and IP address&lt;/h4&gt;
+&lt;p&gt;ansible all -i example.com,&lt;/p&gt;
+
+&lt;h3 id=&quot;or&quot;&gt;OR&lt;/h3&gt;
+
+&lt;h4 id=&quot;requires-hosts-all-in-your-playbook&quot;&gt;Requires ‘hosts: all’ in your playbook&lt;/h4&gt;
+&lt;p&gt;ansible-playbook -i example.com, playbook.yml&lt;/p&gt;
+</description>
+        <pubDate>Mon, 18 Jan 2016 00:00:00 +0000</pubDate>
+        <link>http://arainho.github.io/2016/01/18/ansible-no-inventory-file-just-host-directly.html</link>
+        <guid isPermaLink="true">http://arainho.github.io/2016/01/18/ansible-no-inventory-file-just-host-directly.html</guid>
+        
+        
+      </item>
+    
+      <item>
+        <title>Upgrade Openssh Client To 7.1p2 1</title>
+        <description>&lt;h1 id=&quot;update-openssh-client-to-version-71p2-1&quot;&gt;Update OpenSSH Client to version 7.1p2-1&lt;/h1&gt;
+
+&lt;p&gt;Do to bugs CVE-2016-0777, CVE-2016-0778 with need to upgrade our OpenSSH Client on all machines to version 7.1p2-1,
+or add the line “UseRoaming no” to OpenSSH Client config files. you can check details here &lt;a href=&quot;http://www.cyberciti.biz/faq/howto-openssh-client-security-update-cve-0216-0777-cve-0216-0778/&quot;&gt;cyberciti.biz&lt;/a&gt; or &lt;a href=&quot;https://www.digitalocean.com/community/questions/openssh-client-bug-cve-2016-0777-and-cve-2016-0778&quot;&gt;digitalocean&lt;/a&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;on-linux-and-freebsd&quot;&gt;1. On Linux and FreeBSD&lt;/h3&gt;
+&lt;p&gt;Run this command to add the new line to your config:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;~# echo &#39;UseRoaming no&#39; | sudo tee -a /etc/ssh/ssh_config
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&quot;on-mac-osx&quot;&gt;2. On Mac OSX&lt;/h3&gt;
+&lt;p&gt;Run this command to add the new line to your config:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;~# echo &quot;UseRoaming no&quot; &amp;gt;&amp;gt; ~/.ssh/config
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&quot;to-upgrade-via-packages-on-arch-linux&quot;&gt;3. To upgrade via packages on Arch Linux&lt;/h3&gt;
+&lt;p&gt;With pacman upgrade OpenSSH Client to desired version “7.1p2-1”&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;~# pacman -Sy openssh
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&quot;to-upgrade-via-packages-on-debian--ubuntu-hosts&quot;&gt;4. To upgrade via packages on Debian / Ubuntu hosts&lt;/h3&gt;
+&lt;p&gt;With apt-get upgrade OpenSSH Client to desired version “7.1p2-1”&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;~# apt-get clean &amp;amp;&amp;amp; apt-get update &amp;amp;&amp;amp; apt-get install --reinstall -y openssh-client openssh-server
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&quot;some-old-debian-hosts-has-this-issue&quot;&gt;4.1 Some Old Debian hosts has this issue&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt;~# apt-get install grep openssh-client openssh-server
+
+    Reading package lists... Done
+    Building dependency tree       
+    Reading state information... Done
+    
+    openssh-client is already the newest version.
+    openssh-client set to manually installed.
+    You might want to run &#39;apt-get -f install&#39; to correct these:
+    The following packages have unmet dependencies:
+    openssh-server : Depends: openssh-client (= 1:6.0p1-4+deb7u2)
+    
+    E: Unmet dependencies. Try &#39;apt-get -f install&#39; with no packages (or specify a solution).
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&quot;fix-debconf-first&quot;&gt;4.2 Fix debconf first&lt;/h3&gt;
+&lt;p&gt;Fix debconf installation first, in my case debconf version is 1.5.49&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;~# DEBCONF_VERSION=$(dpkg -l | grep &quot; debconf &quot; | awk &#39;{print $3}&#39;)
+~# wget http://ftp.us.debian.org/debian/pool/main/d/debconf/debconf_&quot;${DEBCONF_VERSION}&quot;_all.deb
+~# dpkg -i debconf_&quot;${DEBCONF_VERSION}&quot;_all.deb
+
+~# apt-get install grep openssh-client openssh-server
+~# dpkg -l | grep openssh
+
+    ii  openssh-client                       1:6.0p1-4+deb7u3                  amd64        secure shell (SSH) client, for secure access to remote machines
+    
+    ii  openssh-server                       1:6.0p1-4+deb7u3                  amd64        secure shell (SSH) server, for secure access from remote machines
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&quot;or-in-last-case-try-a-manual-install&quot;&gt;4.3 Or in last case try a manual install&lt;/h3&gt;
+&lt;p&gt;Try manually installing OpenSSH client with dpkg&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;~# dpkg -i /var/cache/apt/archives/openssh-client*.deb
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&quot;upgrade-openssh-client-via-ansible&quot;&gt;5. Upgrade OpenSSH Client via Ansible&lt;/h3&gt;
+&lt;p&gt;Create a playbook named openssh.yml and run ansible-playbook to update Package on all Debian and Ubuntu nodes&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;~# cat openssh.yml
+
+    - hosts: all
+    gather_facts: yes
+    
+    tasks:
+        - name: Update OpenSSH (Debian+Ubuntu)
+        apt: name=
+            state=latest
+            update_cache=yes
+        with_items:
+            - openssh-client
+            - openssh-server
+            - openssh-blacklist
+            - openssh-blacklist-extra
+            - ncurses-term
+            
+    post_tasks:
+        - name: Check Restart
+        command: checkrestart
+
+
+~# ansible-playbook -i ansible_hosts openssh.yml
+&lt;/code&gt;&lt;/pre&gt;
+
+</description>
+        <pubDate>Fri, 15 Jan 2016 00:00:00 +0000</pubDate>
+        <link>http://arainho.github.io/2016/01/15/upgrade-openssh-client-to-7.1p2-1.html</link>
+        <guid isPermaLink="true">http://arainho.github.io/2016/01/15/upgrade-openssh-client-to-7.1p2-1.html</guid>
+        
+        
+      </item>
+    
+      <item>
+        <title>Remove Device From Zpool</title>
+        <description>&lt;h1 id=&quot;detach-device-from-zpool&quot;&gt;Detach device from zpool&lt;/h1&gt;
+
+&lt;h2 id=&quot;scenario&quot;&gt;Scenario&lt;/h2&gt;
+&lt;p&gt;I create a mirrored zpool equivalent to a RAID1 array &lt;a href=&quot;http://www.zfsbuild.com/2010/06/03/howto-create-mirrored-vdev-zpool/&quot;&gt;zfsbuild website&lt;/a&gt;, but i create the pool with one device connected via usb hdd docking stattion.&lt;/p&gt;
+
+&lt;p&gt;Later on i connect the device directly on my bus sata on my workstation, so i have to remove the device from pool.
+To do this i detach the old device name from pool and attach the new one. &lt;a href=&quot;http://docs.oracle.com/cd/E19253-01/819-5461/gcfhe/index.html&quot;&gt;oracle attach and detach&lt;/a&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;take-offline-the-device&quot;&gt;1. Take offline the device&lt;/h3&gt;
+&lt;p&gt;Take the device offline starting with “usb-WDC_WD15_EARS”, since it does not exit anymore !&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;~# zpool offline tank usb-WDC_WD15_EARS-00MVWB0_DCAA46930898-0:0-part4
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&quot;try-to-remove-device-from-pool&quot;&gt;2. Try to remove device from pool&lt;/h3&gt;
+&lt;p&gt;If you try to remove the device from pool it will fail !&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;~# zpool remove tank usb-WDC_WD15_EARS-00MVWB0_DCAA46930898-0:0-part4 cannot remove usb-WDC_WD15_EARS-00MVWB0_DCAA46930898-0:0-part4: only inactive hot spares, cache, top-level, or log devices can be removed
+
+~# zpool status   pool: tank  state: DEGRADED status: One or more devices has been taken offline by the administrator.
+    Sufficient replicas exist for the pool to continue functioning in a
+    degraded state. action: Online the device using &#39;zpool online&#39; or replace the device with
+    &#39;zpool replace&#39;.   scan: none requested config:
+
+    NAME                                                  STATE     READ WRITE CKSUM
+    tank                                             DEGRADED     0     0     0
+      mirror-0                                            DEGRADED     0     0     0
+        ata-WDC_WD30EFRX-68AX9N0_WD-WMC1T0093794-part4    ONLINE       0     0     0
+        usb-WDC_WD15_EARS-00MVWB0_DCAA46930898-0:0-part4  OFFLINE      0     0     0
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&quot;detach-the-device-from-pool&quot;&gt;3. Detach the device from pool&lt;/h3&gt;
+&lt;p&gt;You can use the zpool detach command to detach a device from a mirrored storage pool.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;~# zpool detach tank usb-WDC_WD15_EARS-00MVWB0_DCAA46930898-0:0-part4
+
+~# zpool status
+
+        pool: tank
+        state: ONLINE
+        scan: none requested
+        config:
+
+                NAME                                              STATE     READ WRITE CKSUM
+                tank                                         ONLINE       0     0     0
+                ata-WDC_WD30EFRX-68AX9N0_WD-WMC1T0093794-part4  ONLINE       0     0     0
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&quot;find-the-id-of-the-new-device&quot;&gt;4. Find the id of the new device&lt;/h3&gt;
+&lt;p&gt;Find the id of the new device to add to the pool, in our case start’s with “ata-WDC_WD15EARS”&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;~# ls -la /dev/disk/by-id/ | grep sdc4
+
+        lrwxrwxrwx 1 root root  10 Jan 15 11:39 ata-WDC_WD15EARS-00MVWB0_WD-WCAZA4693089-part4 -&amp;gt; ../../sdc4
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&quot;attach-the-new-device-to-pool&quot;&gt;5. Attach the new device to pool&lt;/h3&gt;
+&lt;p&gt;Attach the new device to pool and after that you have a two-way mirrored storage pool ;-)&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;~# zpool attach tank ata-WDC_WD30EFRX-68AX9N0_WD-WMC1T0093794-part4 ata-WDC_WD15EARS-00MVWB0_WD-WCAZA4693089-part4
+
+~# root@terrance /h/r/S/g/a/howto# zpool status
+  
+        pool: tank
+        state: ONLINE
+        status: One or more devices is currently being resilvered.  The pool will
+                continue to function, possibly in a degraded state.
+        action: Wait for the resilver to complete.
+        scan: resilver in progress since Fri Jan 15 14:24:43 2016
+            254M scanned out of 196G at 31.7M/s, 1h45m to go
+            253M resilvered, 0.13% done
+        config:
+
+                NAME                                                STATE     READ WRITE CKSUM
+                tank                                           ONLINE       0     0     0
+                mirror-0                                          ONLINE       0     0     0
+                    ata-WDC_WD30EFRX-68AX9N0_WD-WMC1T0093794-part4  ONLINE       0     0     0
+                    ata-WDC_WD15EARS-00MVWB0_WD-WCAZA4693089-part4  ONLINE       0     0     0  (resilvering)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;hr /&gt;
+
+</description>
+        <pubDate>Fri, 15 Jan 2016 00:00:00 +0000</pubDate>
+        <link>http://arainho.github.io/2016/01/15/remove-device-from-zpool.html</link>
+        <guid isPermaLink="true">http://arainho.github.io/2016/01/15/remove-device-from-zpool.html</guid>
+        
+        
+      </item>
+    
+      <item>
+        <title>Grub On Gpt Partition</title>
+        <description>&lt;h1 id=&quot;grub-on-gpt-partitions&quot;&gt;GRUB on GPT Partitions&lt;/h1&gt;
+
+&lt;p&gt;GPT partition tables do not have the limit of 4 primary partitions (unlike MBR) but requires an additional (small) partition to be able to boot from GNU GRUB. 
+Use mktable gpt to initialize a disk with a GPT partition table:&lt;/p&gt;
+
+&lt;pre&gt;
+(parted) mktable gpt
+&lt;/pre&gt;
+
+&lt;p&gt;3 partitions are at least required to use GPT: 
+1 small partition (1MB) with no filesystem at the first 2GB of the disk with toggle bios_grub used for booting, 
+and 2 more for the rootfs and swap, i.e:&lt;/p&gt;
+
+&lt;p&gt;If you don’t have this 1MB partition you get this&lt;/p&gt;
+&lt;pre&gt;
+~# grub-install /dev/sdb
+
+Installing for i386-pc platform.
+grub-install: warning: this GPT partition label contains no BIOS Boot Partition; embedding won&#39;t be p
+ossible.
+grub-install: warning: Embedding is not possible.  GRUB can only be installed in this setup by using 
+blocklists.  However, blocklists are UNRELIABLE and their use is discouraged..
+grub-install: error: will not proceed with blocklists.
+&lt;/pre&gt;
+
+&lt;p&gt;Create partitions&lt;/p&gt;
+&lt;pre&gt;
+parted&amp;gt; mkpart primary ext2 1 2
+parted&amp;gt; set 1 bios_grub on
+parted&amp;gt; mkpart primary linux-swap 2 32G
+parted&amp;gt; mkpart primary ext4 32G 100%
+parted&amp;gt; quit
+&lt;/pre&gt;
+
+&lt;p&gt;List partitions&lt;/p&gt;
+&lt;pre&gt;
+(parted) p
+Model: HP LOGICAL VOLUME (scsi)
+Disk /dev/sdb: 1000GB
+Sector size (logical/physical): 512B/512B
+Partition Table: gpt
+
+Number  Start   End     Size    File system  Name     Flags
+ 1      262kB   2097kB  1835kB               primary  bios_grub
+ 2      2097kB  32.0GB  32.0GB               primary
+ 3      32.0GB  1000GB  968GB                primary
+&lt;/pre&gt;
+
+&lt;p&gt;After this you can install GRUB with success&lt;/p&gt;
+&lt;pre&gt;
+~# grub-install /dev/sdb
+
+Installing for i386-pc platform.
+Installation finished. No error reported
+
+https://github.com/voidlinux/documentation/wiki/Installer-Partitioning
+https://wiki.archlinux.org/index.php/GRUB#GUID_Partition_Table_.28GPT.29_specific_instructions
+&lt;/pre&gt;
+</description>
+        <pubDate>Thu, 14 Jan 2016 00:00:00 +0000</pubDate>
+        <link>http://arainho.github.io/2016/01/14/grub-on-gpt-partition.html</link>
+        <guid isPermaLink="true">http://arainho.github.io/2016/01/14/grub-on-gpt-partition.html</guid>
+        
+        
+      </item>
+    
+      <item>
+        <title>Ebtables</title>
+        <description>&lt;h1 id=&quot;ebtables&quot;&gt;ebtables&lt;/h1&gt;
+
+&lt;p&gt;The ebtables is a filtering tool for Linux-based bridging firewall.
+It enables transparent filtering of network traffic passing through a Linux bridge.&lt;/p&gt;
+
+&lt;h3 id=&quot;list-ebtables-rules&quot;&gt;1. List ebtables rules&lt;/h3&gt;
+&lt;p&gt;List all rules in all chains&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;~# ebtables -L
+
+    Bridge table: filter
+    Bridge chain: INPUT, entries: 0, policy: ACCEPT
+    Bridge chain: FORWARD, entries: 0, policy: ACCEPT
+    Bridge chain: OUTPUT, entries: 0, policy: ACCEPT
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;hr /&gt;
+
+</description>
+        <pubDate>Thu, 14 Jan 2016 00:00:00 +0000</pubDate>
+        <link>http://arainho.github.io/2016/01/14/ebtables.html</link>
+        <guid isPermaLink="true">http://arainho.github.io/2016/01/14/ebtables.html</guid>
+        
+        
+      </item>
+    
+      <item>
+        <title>Dd Over Netcat</title>
+        <description>&lt;h1 id=&quot;using-dd-over-netcat&quot;&gt;Using dd over Netcat&lt;/h1&gt;
+
+&lt;p&gt;I want to clone a VM from OpenStack to a physical CompatFlash attached on my workstation in my private network.&lt;/p&gt;
+
+&lt;p&gt;In case of some public networks or internet use “ssh + dd” as described here in &lt;a href=&quot;https://www.ndchost.com/wiki/server-administration/netcat-over-ssh&quot;&gt;NDCHost Wiki&lt;/a&gt;,
+i use netcat because is faster ;-)&lt;/p&gt;
+
+&lt;h3 id=&quot;a-warning-&quot;&gt;A warning !!&lt;/h3&gt;
+&lt;p&gt;Be extremly careful with dd, and triple check your devices names /dev/sdx  !!&lt;/p&gt;
+
+&lt;h3 id=&quot;on-workstation&quot;&gt;1. On workstation&lt;/h3&gt;
+&lt;p&gt;Go to your workstation and run this, sdf is the destination disk&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;~# nc -l 9000 | dd of=/dev/sdf
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&quot;on-the-instance&quot;&gt;2. On the instance&lt;/h3&gt;
+&lt;p&gt;On the instance do the following, the source disk is /dev/sda&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;~# ssh user@instance-01.local
+~# dd if=/dev/sda | nc serverB.example.net 9000
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&quot;notes&quot;&gt;notes&lt;/h4&gt;
+&lt;p&gt;Usualy i would use screen or tmux on each machine like this, and after detach screen with Ctrl+D.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;~# screen -S clone-sda
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;hr /&gt;
+
+</description>
+        <pubDate>Thu, 14 Jan 2016 00:00:00 +0000</pubDate>
+        <link>http://arainho.github.io/2016/01/14/dd-over-netcat.html</link>
+        <guid isPermaLink="true">http://arainho.github.io/2016/01/14/dd-over-netcat.html</guid>
+        
+        
+      </item>
+    
+      <item>
+        <title>CUPS - print via samba</title>
+        <description>&lt;p&gt;&lt;strong&gt;Issue 1&lt;/strong&gt;
+If you get this message “Unable to get list of printer drivers”&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;solution 1&lt;/strong&gt;
+Replace ServerName line with localhost:631&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ cat /etc/cups/client.conf | grep ServerName -B1
+
+    # see &#39;man client.conf&#39;
+    ServerName /run/cups/cups.sock 
+
+$ sudo sed -i &quot;s/ServerName .*/ServerName localhost:631/g&quot; /etc/cups/client.conf
+$ systemctl restart cups-browsed.service
+
+$ sudo pacman -R foomatic-db foomatic-db-nonfree
+$ sudo systemctl restart org.cups.cupsd
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;Issue 2&lt;/strong&gt;
+If you get this message ‘’ printer-state-message=”Filter failed” ‘’&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Solution 2&lt;/strong&gt;
+upgrade cups-filters as suggested in &lt;a href=&quot;[https://bbs.archlinux.org/viewtopic.php?id=179572&quot;&gt;arch_linux&lt;/a&gt; forums.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ sudo pacman -Sy cups-filters
+    
+    extra/liblouis                   2.6.5-1        6.66 MiB       1.21 MiB
+    extra/cups-filters  1.2.0-1      1.6.0-1        0.12 MiB       0.71 MiB
+&lt;/code&gt;&lt;/pre&gt;
+
+</description>
+        <pubDate>Thu, 24 Sep 2015 15:00:00 +0100</pubDate>
+        <link>http://arainho.github.io/cups/print/archlinux/2015/09/24/print_via_samba.html</link>
+        <guid isPermaLink="true">http://arainho.github.io/cups/print/archlinux/2015/09/24/print_via_samba.html</guid>
+        
+        
+        <category>cups</category>
+        
+        <category>print</category>
+        
+        <category>archlinux</category>
+        
+      </item>
+    
+      <item>
+        <title>Welcome to Jekyll!</title>
+        <description>&lt;p&gt;You’ll find this post in your &lt;code&gt;_posts&lt;/code&gt; directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways, but the most common way is to run &lt;code&gt;jekyll serve&lt;/code&gt;, which launches a web server and auto-regenerates your site when a file is updated.&lt;/p&gt;
+
+&lt;p&gt;To add new posts, simply add a file in the &lt;code&gt;_posts&lt;/code&gt; directory that follows the convention &lt;code&gt;YYYY-MM-DD-name-of-post.ext&lt;/code&gt; and includes the necessary front matter. Take a look at the source for this post to get an idea about how it works.&lt;/p&gt;
+
+&lt;p&gt;Jekyll also offers powerful support for code snippets:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;print_hi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+  &lt;span class=&quot;nb&quot;&gt;puts&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;Hi, &lt;/span&gt;&lt;span class=&quot;si&quot;&gt;#{&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;print_hi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;Tom&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;#=&amp;gt; prints &amp;#39;Hi, Tom&amp;#39; to STDOUT.&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Check out the &lt;a href=&quot;http://jekyllrb.com&quot;&gt;Jekyll docs&lt;/a&gt; for more info on how to get the most out of Jekyll. File all bugs/feature requests at &lt;a href=&quot;https://github.com/jekyll/jekyll&quot;&gt;Jekyll’s GitHub repo&lt;/a&gt;. If you have questions, you can ask them on &lt;a href=&quot;https://github.com/jekyll/jekyll-help&quot;&gt;Jekyll’s dedicated Help repository&lt;/a&gt;.&lt;/p&gt;
+
+</description>
+        <pubDate>Thu, 24 Sep 2015 12:38:23 +0100</pubDate>
+        <link>http://arainho.github.io/jekyll/update/2015/09/24/welcome-to-jekyll.html</link>
+        <guid isPermaLink="true">http://arainho.github.io/jekyll/update/2015/09/24/welcome-to-jekyll.html</guid>
+        
+        
+        <category>jekyll</category>
+        
+        <category>update</category>
+        
+      </item>
+    
+  </channel>
+</rss>

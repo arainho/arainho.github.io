@@ -1,0 +1,12 @@
+# Site settings
+title: arainho Blog
+email: arainho.it@gmail.com
+description: > # this means to ignore newlines until "baseurl:"
+    • find new solutions ! 
+baseurl: "" # the subpath of your site, e.g. /blog/
+url: "http://arainho.github.io" # the base hostname & protocol for your site
+github_username:  arainho
+#twitter_username: arainho_it
+
+# Build settings
+markdown: kramdown
