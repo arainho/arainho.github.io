@@ -46,6 +46,6 @@ I use rpcdebug to dedug rpc, i found a lot of information on [archlinux wiki]
 
 ---
 
-[arch linux]: <https://wiki.archlinux.org/index.php/NFS/Troubleshooting>
+[archlinux wiki]: <https://wiki.archlinux.org/index.php/NFS/Troubleshooting>
 [serverfault]: <http://serverfault.com/questions/188918/problem-with-nfs-server-lockd-timing-out-on-debian-linux>
 
