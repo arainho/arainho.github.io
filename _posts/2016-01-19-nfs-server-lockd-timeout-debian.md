@@ -1,4 +1,11 @@
-# Problem with NFS server lockd timed out on Debian linux 
+---
+layout: post
+title:  "Problem with NFS server lockd timed out on Debian linux "
+date:   2016-01-19 09:32:23
+categories: nfs linux debian
+---
+
+### The issue
 
     ~# dmesg -T
     
@@ -6,7 +13,7 @@
         [Tue Jan 19 13:58:49 2016] lockd: cannot monitor koios
 
 
-## Possible solution 
+### Possible solution 
 I found the answer to this on [serverfault], in Debian/Ubuntu the commands would be:
 
     ~# service nfs-kernel-server stop
@@ -17,7 +24,7 @@ I found the answer to this on [serverfault], in Debian/Ubuntu the commands would
     ~# service nfs-kernel-server start
 
 
-## DEBUG
+### Debugging
 I use rpcdebug to dedug rpc, i found a lot of information on [archlinux wiki]
 
     ~$ rpcdebug -vh
