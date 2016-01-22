@@ -118,6 +118,22 @@ And finally problem is solved :-)
         rootfs      7.4G  4.6G  2.5G  65% /
 
 
+### A fast way, clean log files yourself !!!
+In case you need to clean older logs, a backup could be useful. ;-)
+
+Copy log file
+
+    ~# cp -av --backup=numbered kern.log kern.log.old
+
+Use XZ utils to compress log file
+
+    ~# xz -9 -z -v kern.log.old
+
+Use /dev/null for clean file
+
+    ~# cat /dev/null > file.log
+
+
 
 
 ---
