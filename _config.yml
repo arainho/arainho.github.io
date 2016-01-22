@@ -1,5 +1,5 @@
 # Site settings
-title: arainho ~$ ./blog --list posts
+title: arainho ~$ ./blog --list
 email: arainho.it@gmail.com
 description: > # this means to ignore newlines until "baseurl:"
     $ cat blog | while read post; do echo $post; done
