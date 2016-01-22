@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "A new template for jekyll blog"
-date:   2016-01-22 00:07:00
+date:   2016-01-20 00:07:00
 categories: jekyll template ruby
 ---
 
