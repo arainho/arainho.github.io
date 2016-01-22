@@ -1,4 +1,10 @@
-# Can't start mysql - mysql respawning too fast, stopped
+---
+layout: post
+title:  "Can't start mysql - mysql respawning too fast, stopped"
+date:   2016-01-19 16:07:00
+categories: mysql linux ubuntu
+---
+
 I can't start mysql, so i dig in some blog's and forums like [blogs oracle], [ask ubuntu], [launchpad bugs] and finally i found out that the issue was configuration lines inside my.cnf config file on VM.
 
 
@@ -9,8 +15,6 @@ I can't start mysql, so i dig in some blog's and forums like [blogs oracle], [as
     [Tue Jan 19 15:03:35 2016] init: mysql post-start process (1569) terminated with status 1
     [Tue Jan 19 15:03:36 2016] init: mysql main process (1626) terminated with status 2
     [Tue Jan 19 15:03:36 2016] init: mysql respawning too fast, stopped
-
-
 
     ~# tail /var/log/syslog
 
@@ -100,7 +104,6 @@ Stop and Start MySQL daemon again
         ~# service mysql start
             
             mysql start/running, process 9330
-    
 
 
 ---
