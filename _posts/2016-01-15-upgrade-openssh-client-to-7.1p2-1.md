@@ -98,5 +98,19 @@ Create a playbook named openssh.yml and run ansible-playbook to update Package o
 
     ~# ansible-playbook -i ansible_hosts openssh.yml
 
+### 7. Upgrade OpenSSH Client via Homebrew
+Install openssh via homebrew on Mac OS X laptop.
+
+	~$ brew search openssh
+	~$ brew install homebrew/dupes/openssh
+	~$ sudo mv /usr/bin/ssh /usr/bin/ssh_old
+	~$ sudo ln -s /usr/local/Cellar/openssh/7.1p2/bin/ssh /usr/bin/ssh
+
+### 8. Finally check your version
+It should apear something like this ;-)
+
+	~$ ssh -V
+	  OpenSSH_7.1p2, OpenSSL 1.0.2e 3 Dec 2015
+
 [cyberciti.biz]: <http://www.cyberciti.biz/faq/howto-openssh-client-security-update-cve-0216-0777-cve-0216-0778/>
 [digitalocean]: <https://www.digitalocean.com/community/questions/openssh-client-bug-cve-2016-0777-and-cve-2016-0778>
