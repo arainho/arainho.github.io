@@ -13,21 +13,26 @@ Run this command to add the new line to your config:
 ### 2. On Mac OSX
 Run this command to add the new line to your config:
 
-    ~# echo "UseRoaming no" >> ~/.ssh/config
 
+    ~# echo "UseRoaming no" >> /etc/ssh_config
 
-### 3. To upgrade via packages on Arch Linux
+### 3. Just for current user on Linux / FreeBSD / Mac OS X do this 
+
+    ~$ echo "Host *" 		>> ~/.ssh/config
+    ~$ echo "    UseRoaming no" >> ~/.ssh/config
+
+### 4. To upgrade via packages on Arch Linux
 With pacman upgrade OpenSSH Client to desired version "7.1p2-1"
 
     ~# pacman -Sy openssh
           
 
-### 4. To upgrade via packages on Debian / Ubuntu hosts
+### 5. To upgrade via packages on Debian / Ubuntu hosts
 With apt-get upgrade OpenSSH Client to desired version "7.1p2-1"
 
     ~# apt-get clean && apt-get update && apt-get install --reinstall -y openssh-client openssh-server
 
-### 4.1 Some Old Debian hosts has this issue
+### 5.1 Some Old Debian hosts has this issue
 
     ~# apt-get install grep openssh-client openssh-server
     
@@ -44,7 +49,7 @@ With apt-get upgrade OpenSSH Client to desired version "7.1p2-1"
         E: Unmet dependencies. Try 'apt-get -f install' with no packages (or specify a solution).
 
         
-### 4.2 Fix debconf first
+### 5.2 Fix debconf first
 Fix debconf installation first, in my case debconf version is 1.5.49
 
 
@@ -60,13 +65,13 @@ Fix debconf installation first, in my case debconf version is 1.5.49
         ii  openssh-server                       1:6.0p1-4+deb7u3                  amd64        secure shell (SSH) server, for secure access from remote machines
     
 
-### 4.3 Or in last case try a manual install 
+### 5.3 Or in last case try a manual install 
 Try manually installing OpenSSH client with dpkg
 
     ~# dpkg -i /var/cache/apt/archives/openssh-client*.deb
 
     
-### 5. Upgrade OpenSSH Client via Ansible
+### 6. Upgrade OpenSSH Client via Ansible
 Create a playbook named openssh.yml and run ansible-playbook to update Package on all Debian and Ubuntu nodes
 
     ~# cat openssh.yml
