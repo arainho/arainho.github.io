@@ -1,12 +1,16 @@
 ---
 layout: post
-title:  "Enable port 587 in postfix"
+title:  "Jekyll uninitialized constant"
 date:   2016-01-25 14:02:00
 categories: jekyll psych gem
 ---
 
 
-"Jekyll - uninitialized    constant Psych::Nodes (NameError)"
+I try to run jekyll and get this warning "Jekyll - uninitialized constant",
+i search and found the solution on [github]
+
+I follow these steps:
+
 
     ~$ jekyll serve
 
@@ -25,7 +29,20 @@ categories: jekyll psych gem
         Successfully uninstalled psych-2.0.15
 
 
+    ~$ gem install psych -v 2.0.5
+
+        Fetching: psych-2.0.5.gem (100%)
+        Building native extensions.  This could take a while...
+        Successfully installed psych-2.0.5
+        1 gem installed
+
+
     ~$ jekyll serve
 
         Server address: http://127.0.0.1:4000/
         Server running... press ctrl-c to stop.
+
+
+---
+[github]: <https://github.com/dtao/safe_yaml/issues/72>
+
