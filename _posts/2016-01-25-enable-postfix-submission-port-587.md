@@ -5,12 +5,14 @@ date:   2016-01-25 13:35:00
 categories: postfix ubuntu starttls 587
 ---
 
-Since some ISP have port 25 disabled in their routers to prevent spam.
 
 A client want to use port 587 port with STARTTLS, i need to enable the submission port (587) in postfix 
-to be able to send emails from your local email client to your own mailserver.
+to be able to send emails from your local email client to your own mailserver. 
 
-To enable port 587, edit the file /etc/postfix/master.cf
+I found the solution here on [faqforge].
+
+
+To enable port 587, edit the file master.cf
 and remove the # in front of the line:
 
     ~# vi /etc/postfix/master.cf
