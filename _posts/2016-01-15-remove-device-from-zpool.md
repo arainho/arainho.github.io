@@ -1,18 +1,24 @@
-# Detach device from zpool
+---
+layout: post
+title:  "Detach device from zpool"
+date:   2016-01-15 15:01
+categories: zpool zfs detach
+---
 
-## Scenario
+
+### Scenario
 I create a mirrored zpool equivalent to a RAID1 array [zfsbuild website], but i create the pool with one device connected via usb hdd docking stattion.
 
 Later on i connect the device directly on my bus sata on my workstation, so i have to remove the device from pool.
 To do this i detach the old device name from pool and attach the new one. [oracle attach and detach]
 
-### 1. Take offline the device 
+#### 1. Take offline the device 
 Take the device offline starting with "usb-WDC_WD15_EARS", since it does not exit anymore !
 
     ~# zpool offline tank usb-WDC_WD15_EARS-00MVWB0_DCAA46930898-0:0-part4
     
 
-### 2. Try to remove device from pool
+#### 2. Try to remove device from pool
 If you try to remove the device from pool it will fail !
 
     ~# zpool remove tank usb-WDC_WD15_EARS-00MVWB0_DCAA46930898-0:0-part4
@@ -37,7 +43,7 @@ config:
 
 
     
-### 3. Detach the device from pool
+#### 3. Detach the device from pool
 You can use the zpool detach command to detach a device from a mirrored storage pool.
             
     ~# zpool detach tank usb-WDC_WD15_EARS-00MVWB0_DCAA46930898-0:0-part4
@@ -53,7 +59,7 @@ You can use the zpool detach command to detach a device from a mirrored storage 
                     tank                                         ONLINE       0     0     0
                     ata-WDC_WD30EFRX-68AX9N0_WD-WMC1T0093794-part4  ONLINE       0     0     0
 
-### 4. Find the id of the new device
+#### 4. Find the id of the new device
 Find the id of the new device to add to the pool, in our case start's with "ata-WDC_WD15EARS"
                     
     ~# ls -la /dev/disk/by-id/ | grep sdc4
@@ -61,7 +67,7 @@ Find the id of the new device to add to the pool, in our case start's with "ata-
             lrwxrwxrwx 1 root root  10 Jan 15 11:39 ata-WDC_WD15EARS-00MVWB0_WD-WCAZA4693089-part4 -> ../../sdc4
 
 
-### 5. Attach the new device to pool
+#### 5. Attach the new device to pool
 Attach the new device to pool and after that you have a two-way mirrored storage pool ;-)
 
     ~# zpool attach tank ata-WDC_WD30EFRX-68AX9N0_WD-WMC1T0093794-part4 ata-WDC_WD15EARS-00MVWB0_WD-WCAZA4693089-part4
