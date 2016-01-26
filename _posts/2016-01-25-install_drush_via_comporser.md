@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Install Drush via composer"
-date:   $post_date $post_hour
+date:   2016-01-25  10:46:00
 categories: drush composer drupal
 ---
 
