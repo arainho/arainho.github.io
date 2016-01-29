@@ -1,0 +1,28 @@
+---
+layout: post
+title:  "ZFS Dataset not available at bootup"
+date:   2016-01-29 15:57:22
+categories: zfs boot arch-linux dataset
+---
+
+I have my /home with a ZFS pool in Arch Linux, i reboot the PC and one dataset Code inside is empty !!!
+
+
+    ~$ cd /home/user/Code
+    ~$ ls -la
+
+    
+First unmount the dataset and mount it again
+
+    ~$ sudo zfs unmount -f tank/home/Code
+    ~$ sudo zfs mount tank/home/Code
+
+
+After finally we have content :-D
+
+    ~$ ls -la
+
+        drwxr-xr-x user1.github.io/
+        drwxr-xr-x cloud-init/        
+
+
