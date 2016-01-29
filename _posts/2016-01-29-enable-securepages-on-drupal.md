@@ -14,7 +14,7 @@ If you need to enable or disable secure pages, i found some info at [stackoverfl
     ~$ drush -l example.com vset securepages_enable 0
 
     To enable do this
-    ~$ drush -l example.com vset securepages_enable 0
+    ~$ drush -l example.com vset securepages_enable 1
 
 
 ---
