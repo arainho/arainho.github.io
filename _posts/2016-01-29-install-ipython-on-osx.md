@@ -8,7 +8,7 @@ categories: osx python ipython pip
 First we need to install python via Homebrew, there is a nice post at [stackoverflow] or check out [python-guide].
 
 	~$ brew install python
-  	~$ brew linkapps python
+	~$ brew linkapps python
 	~$ sudo pip install --upgrade pip setuptools
 	~$ sudo pip install ipython
 
