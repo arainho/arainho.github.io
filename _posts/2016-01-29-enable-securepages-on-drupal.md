@@ -5,7 +5,7 @@ date:   2016-01-29 10:32
 categories: drupal drush securepages_enabled
 ---
 
-If you need to enable or disable secure pages, i found some info at [stackoverflow].
+If you need to enable or disable securepages in Drupal, i found some info at [drupal] and [stackoverflow].
 
     Go to your vhost folder
     ~$ cd /var/www/example.com
@@ -19,6 +19,6 @@ If you need to enable or disable secure pages, i found some info at [stackoverfl
 
 ---
 [stackoverflow]: <http://stackoverflow.com/questions/4539608/how-to-disable-secure-pages-on-a-local-server>
-
+[drupal]: <2016-01-29-enable-securepages-on-drupal.md>
 
 
