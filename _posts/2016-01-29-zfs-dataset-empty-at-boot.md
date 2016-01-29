@@ -10,7 +10,9 @@ I have my /home with a ZFS pool in Arch Linux, i reboot the PC and one dataset C
 
     ~$ cd /home/user/Code
     ~$ ls -la
-
+        
+        Jan 29 15:57 ./
+        Jan 29 15:57 ../
     
 First unmount the dataset and mount it again
 
@@ -22,7 +24,7 @@ After finally we have content :-D
 
     ~$ ls -la
 
-        drwxr-xr-x user1.github.io/
-        drwxr-xr-x cloud-init/        
+        user1.github.io/
+        cloud-init/        
 
 
