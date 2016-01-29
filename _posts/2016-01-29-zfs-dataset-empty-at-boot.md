@@ -5,7 +5,8 @@ date:   2016-01-29 15:57:22
 categories: zfs boot arch-linux dataset
 ---
 
-I have my /home with a ZFS pool in Arch Linux, i reboot the PC and one dataset Code inside is empty !!!
+I have my /home with a ZFS pool in Arch Linux, i reboot the PC and my directory 'Code' is empty !!!
+Code directory is a ZFS Dataset, let's check it out ;-)
 
 
     ~$ cd /home/user/Code
