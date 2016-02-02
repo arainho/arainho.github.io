@@ -1,6 +1,11 @@
-# Update OpenSSH Client to version 7.1p2-1
+---
+layout: post
+title:  "Update OpenSSH Client to version 7.1p2-1"
+date:   2016-01-15 09:32:02
+categories: openssh client linux osx freebsd
+---
 
-Do to bugs CVE-2016-0777, CVE-2016-0778 with need to upgrade our OpenSSH Client on all machines to version 7.1p2-1,
+Do to bugs [CVE-2016-0777], [CVE-2016-0778] with need to upgrade our OpenSSH Client on all machines to version 7.1p2-1,
 or add the line "UseRoaming no" to OpenSSH Client config files. you can check details here [cyberciti.biz] or [digitalocean] 
 
 
@@ -112,5 +117,11 @@ It should apear something like this ;-)
 	~$ ssh -V
 	  OpenSSH_7.1p2, OpenSSL 1.0.2e 3 Dec 2015
 
+
+---
+[CVE-2016-0777]: <https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2016-0777>
+[CVE-2016-0778]:<https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2016-0778>
 [cyberciti.biz]: <http://www.cyberciti.biz/faq/howto-openssh-client-security-update-cve-0216-0777-cve-0216-0778/>
 [digitalocean]: <https://www.digitalocean.com/community/questions/openssh-client-bug-cve-2016-0777-and-cve-2016-0778>
+
+
