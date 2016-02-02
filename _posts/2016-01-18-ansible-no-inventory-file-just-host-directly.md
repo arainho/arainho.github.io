@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "# Run Ansible without inventory file"
+title:  "Run Ansible without inventory file"
 date:   2016-01-18 10:36
 categories: ansible inventory-file hosts
 ---
