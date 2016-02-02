@@ -1,4 +1,11 @@
-# GRUB on GPT Partitions
+---
+layout: post
+title:  "GRUB on GPT Partitions"
+date:   2016-01-14  12:19:00
+categories: grub gpt arch-linux
+---
+
+
 
 GPT partition tables do not have the limit of 4 primary partitions (unlike MBR) but requires an additional (small) partition to be able to boot from GNU GRUB. 
 Use mktable gpt to initialize a disk with a GPT partition table:
