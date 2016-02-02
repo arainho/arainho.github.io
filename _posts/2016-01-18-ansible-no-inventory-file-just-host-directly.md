@@ -9,9 +9,11 @@ I want to run Ansible without specifying the inventory file through (ANSIBLE_HOS
 The trick is to append a , after the hostname.
 
 #### Host and IP address
-ansible all -i example.com,
+  
+  ~$ ansible all -i example.com,
 
 ### OR
 
 #### Requires 'hosts: all' in your playbook
-ansible-playbook -i example.com, playbook.yml 
+  
+  ~$ ansible-playbook -i example.com, playbook.yml 
