@@ -1,4 +1,4 @@
----pt-get install linux-image-generic
+---
 layout: post
 title:  "No space left on device, /boot is full"
 date:   2016-02-03 15:51:03
