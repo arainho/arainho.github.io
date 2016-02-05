@@ -8,17 +8,27 @@ categories: openssh client linux osx freebsd
 Do to bugs [CVE-2016-0777], [CVE-2016-0778] with need to upgrade our OpenSSH Client on all machines to version 7.1p2-1,
 or add the line "UseRoaming no" to OpenSSH Client config files. you can check details here [cyberciti.biz] or [digitalocean] 
 
+### 0. Find the configuration file(s) that your ssh client uses
+In a Mac OS with openssh installed via homebrew, besides /Users/you/.ssh/config, ssh client will read /usr/local/etc/ssh/ssh_config. So you sould ssh to a trusted host and check it out.
+
+    ~# ssh -v localhost
+
+	OpenSSH_7.1p2, OpenSSL 1.0.2e 3 Dec 2015
+	debug1: Reading configuration data /home/you/.ssh/config
+	debug1: Reading configuration data /etc/ssh/ssh_config
+	
 
 ### 1. On Linux and FreeBSD
 Run this command to add the new line to your config:
 
-    ~# echo 'UseRoaming no' | sudo tee -a /etc/ssh/ssh_config
+    ~# echo "Host *"        | sudo tee -a /etc/ssh/ssh_config
+    ~# echo "UseRoaming no" | sudo tee -a /etc/ssh/ssh_config
 
     
 ### 2. On Mac OSX
 Run this command to add the new line to your config:
 
-
+    ~# echo "Host *" 	    >> /etc/ssh_config
     ~# echo "UseRoaming no" >> /etc/ssh_config
 
 ### 3. Just for current user on Linux / FreeBSD / Mac OS X do this 
