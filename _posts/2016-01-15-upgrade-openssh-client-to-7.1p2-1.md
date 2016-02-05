@@ -117,7 +117,7 @@ Create a playbook named openssh.yml and run ansible-playbook to update Package o
 
 Install openssh via homebrew on Mac OS X laptop.
 
-Besides ssh you should rename and create symlinks to the new scp, sftp, slogin, ssh-add, ssh-agent, ssh-keygen and ssh-keyscan binaries located in "/usr/local/Cellar/openssh/7.1p2/bin/"
+Besides ssh you should rename and create symlinks to the new _scp, sftp, slogin, ssh-add, ssh-agent, ssh-keygen and ssh-keyscan_ binaries located in _/usr/local/Cellar/openssh/7.1p2/bin/_
 
 	~$ brew search openssh
 	~$ brew install homebrew/dupes/openssh
