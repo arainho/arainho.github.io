@@ -6,7 +6,7 @@ categories: freebsd linux zfs replication
 ---
 
 It's possible to send data of a pool over a network to another system. Snapshots are the basis for this replication (see the section on ZFS snapshots). The commands used for replicating data are zfs send and zfs receive
-I found a lot of information on [freebsd handbook] and [oracle website] 
+I found a lot of information on [freebsd handbook] and [oracle website] and a awesome script at [jeppson techblog].
 
 
 #### First, do the required config
@@ -45,3 +45,4 @@ The unprivileged user now has the ability to receive and mount datasets, and the
 ---
 [freebsd handbook]: <https://www.freebsd.org/doc/handbook/zfs-zfs.html>
 [oracle website]:   <http://docs.oracle.com/cd/E18752_01/html/819-5461/gbchx.html#gbinw>
+[jeppson techblog]: <https://techblog.jeppson.org/2014/10/zfs-remote-replication-script-with-reporting>
