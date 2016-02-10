@@ -19,10 +19,10 @@ Go to [rancher github] and download the release for your OS
 
     ~$ wget https://github.com/rancher/rancher-compose/releases/download/v0.7.2-rc1/rancher-compose-linux-amd64-<version>.tar.gz
     ~$ tar zxvf rancher-compose-linux-amd64-<version>.tar.gz
-    ~$ mv rancher-compose-linux-amd64-<version>/rancher-compose .
+    ~$ mv rancher-compose-linux-amd64-<version>/rancher-compose ~/bin
 
 
-Test it
+Follow [rancher-compose docs] and check it out.
 
     ~> rancher-compose -v
 
@@ -31,3 +31,4 @@ Test it
 
 ---
 [rancher github]: <https://github.com/rancher/rancher-compose/releases>
+[rancher-compose docs]: <http://docs.rancher.com/rancher/rancher-compose/>
