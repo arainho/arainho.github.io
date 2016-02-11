@@ -1,0 +1,48 @@
+---
+layout: post
+title:  "Rancher Apps Catalog - 503 - service unavailable"
+date:   2016-02-11 8:48:00
+categories: rancher apps catalog docker dns service-unavailable
+---
+
+On Rancher web interface i cannot access apps catalog.
+I enter on rancher/server container and found some git clone pending, inside my Company only comany dns are allowed by Enterprise Firewall !
+
+
+1. Go to Docker HOST Machine
+
+    ~$ ssh user@docker-host
+
+2. Inside rancher/server container check dns
+
+    ~$ sudo docker exec -it <rancher/server-id> /bin/bash
+
+    ~> ps aux | grep git
+    ~> dig google.com
+
+    ~> cat /etc/resolv.conf
+        
+            nameserver 8.8.8.8
+            nameserver 8.8.4.4
+
+    change dns servers inside rancher-server container !
+
+        ~> sudo sed -i "s/nameserver 8.8.8.8/nameserver dns.company.com/g" /etc/resolv.conf
+        ~> sudo sed -i "s/nameserver 8.8.4.4/nameserver dns2.company.com/g" /etc/resolv.conf
+        ~> sudo echo "dns.company.com" > /etc/resolvconf/resolvconf.d/base
+        ~> sudo echo "dns2.company.com" >> /etc/resolvconf/resolvconf.d/base
+        ~> sudo /etc/init.d/resolvconf restart
+
+
+3. Back to the Docker HOST Machine, change the google dns to company dns.
+Replace _dns.company.com_ by the ip address of your company dns server.
+
+
+    ~# vi /etc/default/docker
+
+        #DOCKER_OPTS="--dns 8.8.8.8 --dns 8.8.4.4"
+        DOCKER_OPTS="--dns dns.company.com --dns dns2.company.com
+
+
+    ~# service docker restart
+    
