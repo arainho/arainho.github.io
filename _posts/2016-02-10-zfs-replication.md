@@ -9,35 +9,33 @@ It's possible to send data of a pool over a network to another system. Snapshots
 I found a lot of information on [freebsd handbook] and [oracle website] and a awesome script at [jeppson techblog].
 
 
-#### First, do the required config
+#### First steps
 
-    1. passwordless SSH access between sending and receiving host using SSH keys
-    ~# ssh-copy-id someuser@backuphost 
+Setup passwordless SSH access between sending and receiving host using SSH keys
 
-    2. ZFS Delegation system can be used to allow a non-root user on each system to perform the respective send and receive operations.
+```
+~# ssh-copy-id someuser@backuphost
+```
 
-    On the sending system:
+Use ZFS Delegation system to allow a non-root user on each system to perform the respective send and receive operations. On the sending system:
 
-        ~# zfs allow -u someuser send,snapshot mypool
+```
+~# zfs allow -u someuser send,snapshot mypool
+```
 
-    
-    3. To mount the pool, the unprivileged user must own the directory, and regular users must be allowed to mount file systems. 
+Mount the pool, the unprivileged user must own the directory, and regular users must be allowed to mount file systems. On the receiving system:
 
-
-    On the receiving system:
-
-        ~# sysctl vfs.usermount=1
-        vfs.usermount: 0 -> 1
-
-        ~# echo vfs.usermount=1 >> /etc/sysctl.conf
-        ~# zfs create recvpool/backup
-        ~# zfs allow -u someuser create,mount,receive recvpool/backup
-        ~# chown someuser /recvpool/backup
+    ~# sysctl vfs.usermount=1
+    vfs.usermount: 0 -> 1
+       
+    ~# echo vfs.usermount=1 >> /etc/sysctl.conf
+    ~# zfs create recvpool/backup
+    ~# zfs allow -u someuser create,mount,receive recvpool/backup
+    ~# chown someuser /recvpool/backup
 
 #### Finally
 The unprivileged user now has the ability to receive and mount datasets, and the home dataset can be replicated to the remote system:
 
-    
     ~$ zfs snapshot -r mypool/home@monday
     ~$ zfs send -R mypool/home@monday | ssh someuser@backuphost zfs recv -dvu recvpool/backup
 
