@@ -26,6 +26,11 @@ After finally we have content :-D
     ~$ ls -la
 
         user1.github.io/
-        cloud-init/        
+        cloud-init/
+        
+To solve this permanently every time you boot your PC / Laptop, add this line to _fstab_
+
+    ~$ vi /etc/fstab
+        /mnt/tank/home/Code       /home/user/Code     none    bind,defaults,nofail,x-systemd.requires=zfs-mount.service   0 0
 
 
