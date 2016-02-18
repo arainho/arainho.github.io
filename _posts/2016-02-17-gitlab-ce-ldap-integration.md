@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "GitLab Community Edition - first steps"
+title:  "LDAP Integration for GitLab-CE"
 date:   2016-02-16 18:22:02
 categories: gitlab credentials openldap ldap ubuntu
 ---
