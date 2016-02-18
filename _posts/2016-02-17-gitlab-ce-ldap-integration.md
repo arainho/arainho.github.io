@@ -88,21 +88,51 @@ Install Your Company CA Certificate
 
 Check date and timezone on gitlab and ldap servers, it must be the same
 
-    gitlab:~# date
+Go to OpenLDAP machine
     
-        Wed Feb 17 11:32:23 UTC 2016
-
     ldap:~# date
-
         Wed Feb 17 11:32:33 WET 2016
 
+    ldap :~# cat /etc/timezone
+        Europe/Lisbon    
+
+Go to GitLab machine
+
+    gitlab:~# date
+        Wed Feb 17 11:32:23 UTC 2016
     gitlab:~# cat /etc/timezone 
-    
         Etc/UTC
 
-    ldap :~# cat /etc/timezone
-        
-        Europe/Lisbon    
+
+Let's put gitlab host date and timezone ok.
+
+    For RedHat and similar follow [redhat] docs
+
+    ~# timedatectl set-timezone Europe/Lisbon
+
+    On Debian/Ubunt if you have this warning "_Warning: ignoring the TZ variable..._",
+    check TZ var first and put it empty,
+    
+    ~# timedatectl status
+        Warning: ignoring the TZ variable, reading the system's timezone setting only.
+
+    ~# echo $TZ
+        Australia/Adelaide
+
+    ~# TZ=""
+
+    ~# echo "Europe/Lisbon" | sudo tee /etc/timezone
+    ~# dpkg-reconfigure --frontend noninteractive tzdata
+
+    ~# date
+        Wed Feb 17 11:32:33 WET 2016
+
+    ~# cat /etc/timezone
+        Europe/Lisbon
+
+    ~# timedatectl status
+        Local time: Thu 2016-02-18 14:04:35 WET
+
 
 Go to you GitLab and check if you can search your LDAP Server
 
@@ -127,3 +157,7 @@ If you have a issue about invalid credentials, you can check more about it as de
 [stackfiles.io]: <https://stackfiles.io/registry/5617e9eb31f4d50100cc9d2f>
 [serverfault]: <http://serverfault.com/questions/658632/gitlab-openldap-invalid-credentials>
 [gitlab]: <https://gitlab.com/gitlab-org/omnibus-gitlab/blob/629def0a7a26e7c2326566f0758d4a27857b52a3/README.md#setting-up-ldap-sign-in>
+[redhat]: <https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/7/html/System_Administrators_Guide/chap-Configuring_the_Date_and_Time.html#sect-Configuring_the_Date_and_Time-timedatectl-Time_Zone>
+[ubuntu]:
+
+
