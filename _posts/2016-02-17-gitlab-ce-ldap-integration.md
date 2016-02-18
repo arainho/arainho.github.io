@@ -2,7 +2,7 @@
 layout: post
 title:  "GitLab Community Edition - first steps"
 date:   2016-02-16 18:22:02
-categories: gitlab credentials openldap ldap
+categories: gitlab credentials openldap ldap ubuntu
 ---
 
 First I install GitLab-CE with a docker-composer stack, 
@@ -133,6 +133,14 @@ Let's put gitlab host date and timezone ok.
     ~# timedatectl status
         Local time: Thu 2016-02-18 14:04:35 WET
 
+You may need to restart daemons and other long-running programs to get them to use new timezone info. 
+Examples of such programs include apache, bind, cron, etc as refered here on [debian wiki]. 
+
+In my case i have a Ubuntu, and just need to restart cron and rsyslog.
+
+    ~# service cron restart
+    ~# service rsyslog restart
+
 
 Go to you GitLab and check if you can search your LDAP Server
 
@@ -158,6 +166,6 @@ If you have a issue about invalid credentials, you can check more about it as de
 [serverfault]: <http://serverfault.com/questions/658632/gitlab-openldap-invalid-credentials>
 [gitlab]: <https://gitlab.com/gitlab-org/omnibus-gitlab/blob/629def0a7a26e7c2326566f0758d4a27857b52a3/README.md#setting-up-ldap-sign-in>
 [redhat]: <https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/7/html/System_Administrators_Guide/chap-Configuring_the_Date_and_Time.html#sect-Configuring_the_Date_and_Time-timedatectl-Time_Zone>
-[ubuntu]:
+[debian wiki]: <https://wiki.debian.org/TimeZoneChanges>
 
 
