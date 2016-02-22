@@ -1,8 +1,8 @@
 ---
 layout: post
-title:  "$post_name"
-date:   $post_date $post_hour
-categories: $tag1 $tag2
+title:  "Linux mdadm replace disk"
+date:   2016-02-16 10:02:03
+categories: linux mdadm replace disk
 ---
 
 h1. Mdadm add new disk
