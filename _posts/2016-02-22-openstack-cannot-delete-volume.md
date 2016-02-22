@@ -14,16 +14,14 @@ Let's Find your volume id
     ~# cinder list  --all-tenants=1 | grep <volume-name>
 
 
-Know try to delete it
-<pre>
+When i try to delete the volume
+
     ~# cinder delete <volume-id>
 
     Delete for volume <volume-id> failed: Invalid volume: 
     Volume still has 1 dependent snapshots (HTTP 400) (Request-ID: req-51a8c127-5f26-4266-a774-e2375860be20)
     
     ERROR: Unable to delete any of the specified volumes.
-</pre>
-
 
 List snapshots available
 
@@ -38,7 +36,6 @@ Remove the dependent snapshot
 Now we can delete the volume :-)
 
     ~# cinder delete <volume-id>
-
 
 
 ---
