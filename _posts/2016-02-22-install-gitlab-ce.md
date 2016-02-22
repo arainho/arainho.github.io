@@ -8,26 +8,25 @@ categories: gitlab gitlab-ce installation ubuntu
 These are the instalation steps for GitLab Community Edition, the recommended way to install GitLab is with the Omnibus packages. I follow these steps as described at [gitlab] website.
 
 
-1. Install and configure the necessary dependencies
-
+#### Install and configure the necessary dependencies
 <pre>
     ~$ sudo apt-get update
     ~$ apt-get install curl openssh-server ca-certificates postfix
 </pre>
 
-2. Add the GitLab package server and install the package
+#### Add the GitLab package server and install the package
     
 <pre>
     ~$ curl -sS https://packages.gitlab.com/install/repositories/gitlab/gitlab-ce/script.deb.sh | sudo bash
     ~$ sudo apt-get install gitlab-ce
 </pre>
 
-3. Configure and start GitLab
+#### Configure and start GitLab
 
     ~$ sudo gitlab-ctl reconfigure
 
 
-4. Browse to the hostname and login
+#### Browse to the hostname and login
 
     Username: root
     Password: 5iveL!fe
