@@ -74,7 +74,7 @@ Next instruction will bring up four services:
 - elasticsearch-clients
 - kopf
 
-
+<pre>
 	~$ rancher-compose -p es up
 
 	INFO[0001] Creating stack es                            
@@ -91,7 +91,7 @@ Next instruction will bring up four services:
 	INFO[0216] [2/10] [elasticsearch-base-master]: Starting  
 	INFO[0216] [2/10] [elasticsearch-datanodes]: Starting   
 	INFO[0216] [3/10] [elasticsearch-base-master]: Started 
-
+</pre>
         
 Once Kopf is up, click on the container in the Rancher UI, and get the IP of the node it is running on.
 Open a new tab in your browser and go to the IP, You should see one datanode on the page.
@@ -105,10 +105,10 @@ Now lets bring up our Logstash tier, this will bring up the following services:
 - logstash-collector
 - logstash-indexer
 
-
+<pre>
 	~$ cd ../logstash
 	~$ rancher-compose -p logstash up
-
+</pre>
 
 At this point, you can point your applications at logtstash://host:5000.
 (Optional) Install logspout on your nodes
