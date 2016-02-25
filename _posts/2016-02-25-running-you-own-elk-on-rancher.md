@@ -5,6 +5,8 @@ date:   2016-02-25 07:18:39
 categories: ELK Rancher
 ---
 
+I want to run a ELK stack on Rancher, i found a detailed step-by-step guide at [rancher] website
+
 0. Prepare the environment
 
 Go to http://company.com:8080/api and find your "Endpoint for 'Default' Environment"
@@ -24,21 +26,27 @@ In a bash shell do
 
 	~$ source creds
 
-1. Clone our compose template repository:
+Download rancher-compose from this URL
+
+https://github.com/rancher/rancher-compose/releases/latest/
+
+    ~$ wget https://github.com/rancher/rancher-compose/releases/download/v0.7.2/rancher-compose-linux-amd64-<version-number>.tar.gz
+    ~$ tar zxvf rancher-compose-linux-amd64-<version-number>.tar.gz
+    ~$ sudo mv -v rancher-compose-v0.7.2/rancher-compose /usr/local/bin/
+
+    ~$ rancher-compose -v
+
+        rancher-compose version v0.7.2
+
+
+1. Clone our _compose-templates_ repository:
 	
 	~$ git clone https://github.com/rancher/compose-templates.git
+
 
 First lets bring up the Elasticsearch cluster.
 
         ~$ cd compose-templates/elasticsearch
-        
-Next instruction will bring up four services: 
-(Other services assume es as the elasticsearch stack name)
-
-    elasticsearch-masters
-    elasticsearch-datanodes
-    elasticsearch-clients
-    kopf
 
 
 First try will fail, cannot find the docker-compose.yml file.
@@ -58,7 +66,14 @@ First try will fail, cannot find the docker-compose.yml file.
 
 	~$ cd 0.3.1/
 
-I finaly will bring up the four services
+Next instruction will bring up four services: 
+(Other services assume _es_ as the elasticsearch stack name)
+
+- elasticsearch-masters
+- elasticsearch-datanodes
+- elasticsearch-clients
+- kopf
+
 
 	~$ rancher-compose -p es up
 
@@ -79,16 +94,17 @@ I finaly will bring up the four services
 
         
 Once Kopf is up, click on the container in the Rancher UI, and get the IP of the node it is running on.
-
-Open a new tab in your browser and go to the IP. 
-You should see one datanode on the page.
+Open a new tab in your browser and go to the IP, You should see one datanode on the page.
 
 	http://node.company.com/#!/cluster
 
+
 Now lets bring up our Logstash tier, this will bring up the following services:
+
 - Redis
 - logstash-collector
 - logstash-indexer
+
 
 	~$ cd ../logstash
 	~$ rancher-compose -p logstash up
@@ -97,17 +113,38 @@ Now lets bring up our Logstash tier, this will bring up the following services:
 At this point, you can point your applications at logtstash://host:5000.
 (Optional) Install logspout on your nodes
 
-~$ cd ../logspout
-~$ rancher-compose -p logspout up
+    ~$ cd ../logspout
+    ~$ rancher-compose -p logspout up
 
-This will bring up a logspout container on every node in your Rancher environment. Logs will start moving through the pipeline into Elasticsearch.
-    Finally, lets bring up Kibana 4
-        cd ../kibana
-        rancher-compose -p kibana up
-        This will bring up the following services
-            kibana-vip
-            nginx-proxy
-            kibana4
-        Click the container in the kibana-vip service in the Rancher UI. Visit the host ip in a separate browser tab. You will be directed to the Kibana 4 landing page to select your index.
 
-Now that you have a fully functioning ELK stack on Rancher, you can start sending your logs through the Logstash collector. By default the collector is listening for Logstash inputs on UDP port 5000. If you are running applications outside of Rancher, you can simply point them to your Logstash endpoint. If your application runs on Rancher you can use the optional Logspout-logstash service above. If your services run outside of Rancher, you can configure your Logstash to use Gelf, and use the Docker log driver. Alternatively, you could setup a Syslog listener, or any number of supported Logstash input plugins.
+This will bring up a logspout container on every node in your Rancher environment.
+Logs will start moving through the pipeline into Elasticsearch.
+
+
+Finally lets bring up Kibana 4, this will bring up the following services
+- kibana-vip
+- nginx-proxy
+- kibana4
+
+
+        ~$ cd ../kibana
+        ~$ rancher-compose -p kibana up
+
+
+Click the container in the kibana-vip service in the Rancher UI. 
+Visit the host ip in a separate tab, you will be directed to the Kibana 4 landing page to select your index.
+
+Now that you have a fully functioning ELK stack on Rancher, you can start sending your logs through the Logstash collector.
+By default the collector is listening for Logstash inputs on UDP port 5000. 
+
+If you are running applications outside of Rancher, you can simply point them to your Logstash endpoint. 
+If your application runs on Rancher you can use the optional Logspout-logstash service above. 
+
+If your services run outside of Rancher, you can configure your Logstash to use Gelf, and use the Docker log driver.
+Alternatively, you could setup a Syslog listener, or any number of supported Logstash input plugins.
+
+
+---
+[rancher]: <http://rancher.com/running-our-own-elk-stack-with-docker-and-rancher/>
+
+
