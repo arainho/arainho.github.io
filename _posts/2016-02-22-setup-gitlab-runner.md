@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Setup GitLab-CE runner"
+title:  "Setup GitLab-CI Runner"
 date:   2016-02-22 14:00:02
 categories: gitlab gitlab-ce runner
 ---
