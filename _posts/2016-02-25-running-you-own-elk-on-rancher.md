@@ -106,14 +106,14 @@ Now lets bring up our Logstash tier, this will bring up the following services:
 - logstash-indexer
 
 <pre>
-	~$ cd ../logstash
+	~$ cd ../../logstash/0.2.0/
 	~$ rancher-compose -p logstash up
 </pre>
 
 At this point, you can point your applications at logtstash://host:5000.
 (Optional) Install logspout on your nodes
 
-    ~$ cd ../logspout
+    ~$ cd ../../logspout
     ~$ rancher-compose -p logspout up
 
 
@@ -127,7 +127,7 @@ Finally lets bring up Kibana 4, this will bring up the following services
 - kibana4
 
 
-        ~$ cd ../kibana
+        ~$ cd ../kibana/0.2.0/
         ~$ rancher-compose -p kibana up
 
 
