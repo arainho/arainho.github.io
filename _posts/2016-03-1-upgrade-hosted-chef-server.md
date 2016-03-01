@@ -71,10 +71,34 @@ Upgrade the server with this:
 
     ~# chef-server-ctl upgrade
 
+        ok: down: opscode-chef-mover: 0s, normally up
+        down: opscode-chef-mover: 2s, normally up; run: log: (pid 993) 8313s
+        down: opscode-chef-mover: 4s, normally up; run: log: (pid 993) 8315s
+        [private-chef-upgrade] - Sleeping for 10 seconds while services stop...
+        [private-chef-upgrade] - Finished Migration 1.29 in 76.87 seconds
+        Chef Server Upgraded!
+
 
 Start Chef server 12:
 
     ~# chef-server-ctl start
+
+        ok: run: bookshelf: (pid 17405) 1s
+        ok: run: ec_sync_client: (pid 17446) 0s
+        ok: run: ec_sync_server: (pid 17450) 0s
+        ok: run: nginx: (pid 17480) 1s
+        ok: run: oc_bifrost: (pid 16053) 1249s
+        ok: run: oc_id: (pid 17487) 0s
+        ok: run: opscode-chef-mover: (pid 17507) 1s
+        ok: run: opscode-erchef: (pid 17540) 0s
+        ok: run: opscode-expander: (pid 17545) 0s
+        ok: run: opscode-expander-reindexer: (pid 17552) 0s
+        ok: run: opscode-pushy-server: (pid 17557) 0s
+        ok: run: opscode-reporting: (pid 17564) 1s
+        ok: run: opscode-solr4: (pid 17617) 0s
+        ok: run: postgresql: (pid 15930) 1296s
+        ok: run: rabbitmq: (pid 17635) 0s
+        ok: run: redis_lb: (pid 17645) 0s
 
 
 After the upgrade is complete and everything verified to be working properly, 
@@ -82,6 +106,8 @@ clean up the server by removing all of the old data:
 
     $ chef-server-ctl cleanup
 
+        Starting Chef Client, version 12.7.0
+        Chef Client finished, 2/113 resources updated in 04 seconds
 
 
 ---
