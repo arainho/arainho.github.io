@@ -5,11 +5,9 @@ date:   2015-12-29 15:22:03
 categories: openstack mac-address linux instance cadence
 ---
 
-
-
 I have an instance with Cadence on my Openstack and i need a custom mac address, in order to get Cadence and other license software to work properly.
 
-1. Change mac address on MySQL on database: neutron and table: ports
+1. Change mac address on MySQL on _neutron database_ and _table_ named _ports_
 2. power off Instance
 3. backup libvirt.xml inside instance folder on Compute node
 4. remove libvirt.xml
