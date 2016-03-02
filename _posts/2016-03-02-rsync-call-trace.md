@@ -8,6 +8,9 @@ categories: rsync call-trace ubuntu openldap
 In a Ubuntu server, while cloning to a CompatFlash rsync failed with call trace.
 The following pictures show us the issue found
 
+![Alt text](../img/rsync_call_trace.JPG "rsync call trace")
+![Alt text](../img/rsync_call_trace1_1.JPG "rsync call trace")
+
 
 Checking the log's also show us huge logs on _/var/log_ directory
 
