@@ -53,6 +53,13 @@ Upgrade your system:
     ~# apt-get upgrade
 
 
+Change your sudoers file, and change users line
+
+    ~# vi /etc/sudoers
+    
+        myuser  ALL=(ALL:ALL) ALL
+
+
 Upgrade your system and remove obsolete packages
 
     ~# apt-get dist-upgrade
