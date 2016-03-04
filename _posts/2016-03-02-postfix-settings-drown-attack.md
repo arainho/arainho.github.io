@@ -8,7 +8,7 @@ categories: drown drown-attack postfix
 Ensure that your Postfix configuration disables SSLv2, and weak or obsolete ciphers, you should also deploy the appropriate OpenSSL upgrade.
 
 The below recommended TLS settings for Postfix are sufficient to avoid exposure to DROWN. 
-Many of these are defaults in sufficiently recent releases, I found it on [drownattack] website.
+Many of these are defaults in sufficiently recent releases, I follow this [postfix] config.
 
 
 Change your config to this:
@@ -91,4 +91,5 @@ Go to [drownattack] website and see if you are vulnerable.
 
 
 ---
-[postfix config]: <https://drownattack.com/postfix.html>
+[postfix]: <https://drownattack.com/postfix.html>
+[drownattack]: <https://test.drownattack.com>
