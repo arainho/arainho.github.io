@@ -48,12 +48,15 @@ Install apt from Wheezy before upgrading your system:
     ~# apt-get install apt -t wheezy
 
 
-Upgrade your system:
+Upgrade your system, and carefully check all debconf prompts and update configuration files as needed. 
 
     ~# apt-get upgrade
 
 
-Change your sudoers file, and change users line
+Open a new terminal and use vimdiff to check differences between old file and new conf file.
+In my case I neeed to change your sudoers file, and change users line
+
+    ~# vimdiff /etc/sudoers /etc/sudoers.dpkg-new
 
     ~# vi /etc/sudoers
     
@@ -63,10 +66,20 @@ Change your sudoers file, and change users line
 Upgrade your system and remove obsolete packages
 
     ~# apt-get dist-upgrade
+
+        Reading package lists... Done
+        Building dependency tree       
+        Reading state information... Done
+        Calculating upgrade... Failed
+        The following packages have unmet dependencies:
+         initscripts : Breaks: nfs-common (< 1:1.2.5-3) but 1:1.2.2-4squeeze3 is to be installed
+        E: Error, pkgProblemResolver::Resolve generated breaks, this may be caused by held packages.
+
+    ~# apt-get remove nfs-common
+    ~# apt-get install nfs-common
+
     ~# apt-get autoremove
 
-
-Carefully check all debconf prompts and update configuration files as needed. 
 
 
 ---
