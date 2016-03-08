@@ -75,11 +75,29 @@ Upgrade your system and remove obsolete packages
          initscripts : Breaks: nfs-common (< 1:1.2.5-3) but 1:1.2.2-4squeeze3 is to be installed
         E: Error, pkgProblemResolver::Resolve generated breaks, this may be caused by held packages.
 
+Remove NFS common and install it again
+
     ~# apt-get remove nfs-common
     ~# apt-get install nfs-common
 
-    ~# apt-get autoremove
+    ~# apt-get dist-upgrade
 
+        ................................
+        ...................
+        ..........
+
+        Fetched 189 MB in 52s (3613 kB/s)
+        Failed to fetch http://httpredir.debian.org/debian/pool/main/p/p11-kit/libp11-kit-dev_0.12-3_i386.deb  
+        Error reading from server. Remote end closed connection [IP: ...... 80]
+
+        Failed to fetch http://httpredir.debian.org/debian/pool/main/m/mpclib/libmpc2_0.9-4_i386.deb  
+        Error reading from server. Remote end closed connection [IP: ....... 80]
+        E: Unable to fetch some archives, maybe run apt-get update or try with --fix-missing?
+    
+    ~# apt-get update --fix-missing
+    ~# apt-get dist-upgrade
+    
+    ~# apt-get autoremove
 
 
 ---
