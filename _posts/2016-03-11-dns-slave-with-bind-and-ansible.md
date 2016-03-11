@@ -18,54 +18,54 @@ Create your own playbook, i use a template i found on github named [ansible-role
 Replace _example.com_ with your domain and _192.168.0.201_ with the ipv4 of your DNS Master.
 
 <pre>
-    ~$ vi dns-slave.yml 
+~$ vi dns-slave.yml 
 
-        ---
-        - hosts: dns_slave
-        
-          vars:
-            my_hostname: "dns2"
-				    my_domain: "example.com"
-				    my_nameserver1: "127.0.0.1"
-				    my_nameserver2: "192.168.0.200"
-				    my_nameserver3: "8.8.8.8"       
- 
-            bind_config_slave_zones:
-              - name: example.com
-                masters: [ '192.168.0.201' ]
-                zones:
-                  - example.com
-                  - vm.example.com
-                  - dyn.example.com
-        
-          tasks:
-        
-          - name: "Change machine hostname"
-            hostname: name={{my_hostname}} 
+---
+- hosts: dns_slave
 
-				  - name: "Set resolvconf nameserver"
-				    blockinfile:
-				        dest=/etc/resolvconf/resolv.conf.d/base
-				        block= |
-				            search {{ my_domain }}
-				            nameserver {{ my_nameserver1 }}
-				            nameserver {{ my_nameserver2 }}
-				            nameserver {{ my_nameserver3 }}
-				
-				  - name: "Restart resolvconf service"
-				    service: 
-				      name=resolvconf
-				      enabled=yes
-				      state=restarted
-        
-          - name: "Restart DNS Service"
-            service:
-                name=bind9
-                enabled=yes
-                state=restarted
-        
-          roles:
-            - ansible-role-bind
+  vars:
+    my_hostname: "dns2"
+    my_domain: "example.com"
+    my_nameserver1: "127.0.0.1"
+    my_nameserver2: "192.168.0.200"
+    my_nameserver3: "8.8.8.8"       
+
+    bind_config_slave_zones:
+      - name: example.com
+        masters: [ '192.168.0.201' ]
+        zones:
+          - example.com
+          - vm.example.com
+          - dyn.example.com
+
+  tasks:
+
+  - name: "Change machine hostname"
+    hostname: name={{my_hostname}} 
+
+  - name: "Set resolvconf nameserver"
+    blockinfile:
+        dest=/etc/resolvconf/resolv.conf.d/base
+        block= |
+            search {{ my_domain }}
+            nameserver {{ my_nameserver1 }}
+            nameserver {{ my_nameserver2 }}
+            nameserver {{ my_nameserver3 }}
+
+  - name: "Restart resolvconf service"
+    service: 
+      name=resolvconf
+      enabled=yes
+      state=restarted
+
+  - name: "Restart DNS Service"
+    service:
+        name=bind9
+        enabled=yes
+        state=restarted
+
+  roles:
+    - ansible-role-bind
 </pre>
 
 <pre>
@@ -86,30 +86,30 @@ Replace _example.com_ with your domain and _192.168.0.201_ with the ipv4 of your
 </pre>
 
 <pre>
-    ~# vi /etc/named.conf
+~# vi /etc/named.conf
 
-        allow-query     	{ localhost; 192.168.0.0/24; };
-        allow-transfer		{ localhost; 192.168.0.201; };  # Here we need to our Slave DNS server IP.
-        recursion no;
+    allow-query     	{ localhost; 192.168.0.0/24; };
+    allow-transfer		{ localhost; 192.168.0.201; };  # Here we need to our Slave DNS server IP.
+    recursion no;
 </pre>
 
 ### Go to your DNS Master, and edit your zone file
 
 <pre>
-    ~# vi /etc/bind/example.com.zone
+~# vi /etc/bind/example.com.zone
 
-					$TTL 86400
-					@       IN SOA  dns.example.com.     root.example.com. (
-					                                  2014090401    ; serial
-					                                        3600    ; refresh
-					                                        1800    ; retry
-					                                      604800    ; expire
-					                                       86400 )  ; minimum
-					
-					; Name server's
-					
-					       IN      NS      dns.example.com.
-					       IN      NS      dns2.example.com.        
+			$TTL 86400
+			@       IN SOA  dns.example.com.     root.example.com. (
+			                                  2014090401    ; serial
+			                                        3600    ; refresh
+			                                        1800    ; retry
+			                                      604800    ; expire
+			                                       86400 )  ; minimum
+			
+			; Name server's
+			
+			       IN      NS      dns.example.com.
+			       IN      NS      dns2.example.com.        
 </pre>
 
 
