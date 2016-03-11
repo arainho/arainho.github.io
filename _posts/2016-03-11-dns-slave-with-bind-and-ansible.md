@@ -17,6 +17,7 @@ Clone the Ansible repository
 Create your own playbook, i use a template i found on github named [ansible-role-bind].
 Replace _example.com_ with your domain and _192.168.0.201_ with the ipv4 of your DNS Master.
 
+<pre>
     ~$ vi dns-slave.yml 
 
         ---
@@ -65,12 +66,14 @@ Replace _example.com_ with your domain and _192.168.0.201_ with the ipv4 of your
         
           roles:
             - ansible-role-bind
+</pre>
 
-
+<pre>
     ~$ vi ansible_hosts 
 
         [dns_slave]
         dns2.example.com      ansible_connection=ssh  ansible_ssh_user=root
+</pre>
 
 
     ~$ ansible-playbook -i ansible_hosts dns-slave.yml
@@ -78,17 +81,21 @@ Replace _example.com_ with your domain and _192.168.0.201_ with the ipv4 of your
     
 ### Go to your _named.conf_ or your zone files and add _ipv4_ of the Slave DNS to the line _allow-transfer_
 
+<pre>
     ~# ssh dns@example.com
+</pre>
 
+<pre>
     ~# vi /etc/named.conf
 
         allow-query     	{ localhost; 192.168.0.0/24; };
         allow-transfer		{ localhost; 192.168.0.201; };  # Here we need to our Slave DNS server IP.
         recursion no;
-
+</pre>
 
 ### Go to your DNS Master, and edit your zone file
 
+<pre>
     ~# vi /etc/bind/example.com.zone
 
 					$TTL 86400
@@ -103,6 +110,7 @@ Replace _example.com_ with your domain and _192.168.0.201_ with the ipv4 of your
 					
 					       IN      NS      dns.example.com.
 					       IN      NS      dns2.example.com.        
+</pre>
 
 
 ### Check your conf and zone files
