@@ -88,8 +88,8 @@ Replace _example.com_ with your domain and _192.168.0.201_ with the ipv4 of your
 <pre>
 ~# vi /etc/named.conf
 
-    allow-query     	{ localhost; 192.168.0.0/24; };
-    allow-transfer		{ localhost; 192.168.0.201; };  # Here we need to our Slave DNS server IP.
+    allow-query       { localhost; 192.168.0.0/24; };
+    allow-transfer    { localhost; 192.168.0.201; };  # Slave DNS ipv4.
     recursion no;
 </pre>
 
@@ -98,18 +98,18 @@ Replace _example.com_ with your domain and _192.168.0.201_ with the ipv4 of your
 <pre>
 ~# vi /etc/bind/example.com.zone
 
-			$TTL 86400
-			@       IN SOA  dns.example.com.     root.example.com. (
-			                                  2014090401    ; serial
-			                                        3600    ; refresh
-			                                        1800    ; retry
-			                                      604800    ; expire
-			                                       86400 )  ; minimum
-			
-			; Name server's
-			
-			       IN      NS      dns.example.com.
-			       IN      NS      dns2.example.com.        
+$TTL 86400
+@       IN SOA  dns.example.com.     root.example.com. (
+                                  2014090401    ; serial
+                                        3600    ; refresh
+                                        1800    ; retry
+                                      604800    ; expire
+                                       86400 )  ; minimum
+
+; Name server's
+
+       IN      NS      dns.example.com.
+       IN      NS      dns2.example.com.        
 </pre>
 
 
