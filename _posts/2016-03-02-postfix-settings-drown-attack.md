@@ -62,6 +62,10 @@ Change your config to this:
         smtpd_tls_exclude_ciphers =
             EXPORT, LOW, MD5, SEED, IDEA, RC2
 
+Generate the Diffie-Hellman file _dh2048.pem_
+
+    ~# openssl gendh -out /etc/postfix/dh2048.pem -2 2048
+
 
 Test your configuration:
 
