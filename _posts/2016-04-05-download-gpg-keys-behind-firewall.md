@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Download GPG Keys Behind Firewall"
-date:   2016-04-05 17:10:00
+date:   2016-04-05 17:10
 categories: gpg firewall linux rvm 
 ---
 
