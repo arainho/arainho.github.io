@@ -5,8 +5,6 @@ date:   2016-04-05 13:25:13
 categories: gpg firewall linux rvm 
 ---
 
-
-
 In case you need to download GPG keys, and you have some Firewall ou Proxy behind you.
 In the proxy case you can do the following.
 
