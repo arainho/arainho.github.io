@@ -2,7 +2,7 @@
 layout: post
 title:  "OpenConnect VPN Server on Docker container"
 date:   2016-05-19 16:12
-categories: vpn server openconnect docker container
+categories: vpn openconnect docker ocserv
 ---
 
 # OpenConnect VPN Server -- 'ocserv'
