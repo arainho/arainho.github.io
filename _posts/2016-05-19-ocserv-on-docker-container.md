@@ -23,7 +23,9 @@ ssh you@server.example.com
 My script to launch ocserv container is this:
 ```sh
 cat ./launch_ocserv.sh
+```
 
+```sh
 #!/bin/bash
 
 OCSERV_GIT_DIR="ocserv-docker"
