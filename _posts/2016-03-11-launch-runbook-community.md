@@ -7,7 +7,7 @@ categories: runbook containers linux
 
 ### Intro
 I installed a RunBook container on Rancher farm, setup some monitoring alerts and start to setup some action reactions.
-The container goes down and we lost the our settings ...  
+The container goes down and I lost a few settings ...  
 
 ### Option 1.
 So let´s launch the container with a volume attached :-)
