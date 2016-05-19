@@ -5,7 +5,7 @@ date:   2016-05-19 16:12
 categories: vpn openconnect docker ocserv
 ---
 
-# OpenConnect VPN Server -- 'ocserv'
+## OpenConnect VPN Server -- 'ocserv'
 
 OpenConnect server (ocserv) is an SSL VPN server. Its purpose is to be a secure, small, fast and configurable VPN server. It implements the OpenConnect SSL VPN protocol, and has also (currently experimental) compatibility with clients using the AnyConnect SSL VPN protocol. The OpenConnect protocol provides a dual TCP/UDP VPN channel, and uses the standard IETF security protocols to secure it. The server is implemented primarily for the GNU/Linux platform but its code is designed to be portable to other UNIX variants as well. 
 
@@ -21,6 +21,7 @@ ssh you@server.example.com
 ```
 
 My script to launch ocserv container is this:
+
 ```sh
 cat ./launch_ocserv.sh
 ```
@@ -49,6 +50,7 @@ docker ps -aq | xargs docker logs
 
 ## Clean default users
 Remove the default users of the docker container
+
 ```sh
 FILE="/etc/ocserv/ocpasswd"
 SED_COMMAND=(sed -i '1,2d' ${FILE})
@@ -56,6 +58,7 @@ docker exec -it "$(docker ps -a | grep vpn_run | awk '{print $ 1}')" "${SED_COMM
 ```
 
 ## Add a new user
+
 ```sh
 OCSERV_DOCKER_ID=$(docker ps -a | grep vpn_run | awk '{print $1}')
 docker exec -it ${CSERV_DOCKER_ID} ocpasswd my_username
@@ -66,16 +69,19 @@ docker exec -it ${CSERV_DOCKER_ID} ocpasswd my_username
 
 ### check openconnect version
 You should have OpenConnect version v7.06 or higher :-)
+
 ```sh
 openconnect --version
 ```
 
 ### manually
+
 ```sh
 sudo openconnect --no-cert-check --no-dtls server.example.com
 ```
 
 ### automatically with a script
+
 ```sh
 MY_USER="my_username"
 MY_PASSWORD="my_password"
