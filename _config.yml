@@ -4,9 +4,12 @@ email: arainho.it@gmail.com
 description: > # this means to ignore newlines until "baseurl:"
     $ cat blog | while read post; do echo $post; done
 baseurl: "" # the subpath of your site, e.g. /blog/
-url: "http://arainho.github.io" # the base hostname & protocol for your site
+url: "http://blog.arainho.me" # the base hostname & protocol for your site
 github_username:  arainho
 #twitter_username: arainho_it
 
 # Build settings
 markdown: kramdown
+
+# Google services
+google_analytics: UA-78057681-1
