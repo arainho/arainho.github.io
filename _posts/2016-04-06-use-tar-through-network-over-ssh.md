@@ -1,5 +1,6 @@
 ---
 layout: post
+comments: true
 title:  "Use tar through network over SSH"
 date:   2016-04-06 10:37
 categories: tar ssh network

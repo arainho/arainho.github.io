@@ -1,5 +1,6 @@
 ---
 layout: post
+comments: true
 title:  "Linux Force fsck on the Next Reboot"
 date:   2016-02-16 16:50:09
 categories: linux fsck reboot

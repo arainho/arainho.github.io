@@ -1,5 +1,6 @@
 ---
 layout: post
+comments: true
 title:  "Jekyll uninitialized constant"
 date:   2016-01-25 14:02:00
 categories: jekyll psych gem

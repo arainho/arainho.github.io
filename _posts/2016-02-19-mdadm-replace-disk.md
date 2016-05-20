@@ -1,5 +1,6 @@
 ---
 layout: post
+comments: true
 title:  "Linux mdadm replace disk"
 date:   2016-02-16 10:02:03
 categories: linux mdadm replace disk

@@ -1,5 +1,6 @@
 ---
 layout: post
+comments: true
 title:  "OpenStack cannot delete volume"
 date:   2016-02-22 14:23
 categories: openstack cinder mysql delete volume snapshots issue

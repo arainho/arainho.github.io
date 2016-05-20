@@ -1,5 +1,6 @@
 ---
 layout: post
+comments: true
 title:  "profile_load_profile call broken in php 5.5"
 date:   2016-01-28 20:13:00
 categories: drupal php5.5 profile_load_profile

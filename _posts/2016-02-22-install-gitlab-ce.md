@@ -1,5 +1,6 @@
 ---
 layout: post
+comments: true
 title:  "Install GitLab-CE on Ubuntu 14.04 LTS"
 date:   2016-02-22 11:37
 categories: gitlab gitlab-ce installation ubuntu

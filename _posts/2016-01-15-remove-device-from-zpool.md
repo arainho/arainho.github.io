@@ -1,5 +1,6 @@
 ---
 layout: post
+comments: true
 title:  "Detach device from zpool"
 date:   2016-01-15 15:01
 categories: zpool zfs detach

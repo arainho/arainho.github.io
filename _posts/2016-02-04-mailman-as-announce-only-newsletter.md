@@ -1,5 +1,6 @@
 ---
 layout: post
+comments: true
 title:  "MailMan as 'Announce Only' Newsletter"
 date:   2016-02-04 19:24:00
 categories: mailman announce ml newsletter

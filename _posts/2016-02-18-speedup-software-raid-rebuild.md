@@ -1,5 +1,6 @@
 ---
 layout: post
+comments: true
 title:  "Speedup raid rebuilds"
 date:   2016-02-18 16:35
 categories: rebuild raid speedup linux

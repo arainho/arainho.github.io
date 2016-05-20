@@ -1,5 +1,6 @@
 ---
 layout: post
+comments: true
 title:  "Change default mac address in OpenStack instance"
 date:   2015-12-29 15:22:03
 categories: openstack mac-address linux instance cadence

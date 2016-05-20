@@ -1,5 +1,6 @@
 ---
 layout: post
+comments: true
 title:  "Postfix Settings - The DROWN Attack"
 date:   2016-03-03 15:45
 categories: drown drown-attack postfix

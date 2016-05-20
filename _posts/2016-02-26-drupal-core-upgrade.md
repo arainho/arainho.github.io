@@ -1,5 +1,6 @@
 ---
 layout: post
+comments: true
 title:  "Drupal core upgrade"
 date:   2016-02-26 15:42
 categories: drupal upgrade

@@ -1,5 +1,6 @@
 ---
 layout: post
+comments: true
 title:  "Increase OpenLDAP log level"
 date:   2016-02-16 09:58
 categories: openldap logs loglevel

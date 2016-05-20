@@ -1,5 +1,6 @@
 ---
 layout: post
+comments: true
 title:  "Destroy zfs dataset fails"
 date:   2016-01-26 10:35:00
 categories: zfs dataset destroy-dataset unmount-dataset

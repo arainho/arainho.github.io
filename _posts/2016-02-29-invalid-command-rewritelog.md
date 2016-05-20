@@ -1,5 +1,6 @@
 ---
 layout: post
+comments: true
 title:  "Apache - Invalid command RewriteLog"
 date:   2016-02-29 17:00
 categories: apache mod_rewrite upgrade

@@ -1,5 +1,6 @@
 ---
 layout: post
+comments: true
 title:  "Amavisd - define myhostname variable"
 date:   2016-03-04 14:23
 categories: debian amavisd myhostname

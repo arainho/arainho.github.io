@@ -1,5 +1,6 @@
 ---
 layout: post
+comments: true
 title:  "Linux filesystem is full"
 date:   2016-01-22 10.21
 categories: linux filesystem nfs syslog debian

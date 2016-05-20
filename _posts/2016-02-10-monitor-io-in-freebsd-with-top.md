@@ -1,5 +1,6 @@
 ---
 layout: post
+comments: true
 title:  "Use top to monitor I/O on FreeBSD"
 date:   2016-02-10  16:53:00
 categories: freebsd top io

@@ -1,5 +1,6 @@
 ---
 layout: post
+comments: true
 title:  "Put your documentation online with couscous"
 date:   2015-12-29 17:00:00
 categories: composer homebrew osx couscous

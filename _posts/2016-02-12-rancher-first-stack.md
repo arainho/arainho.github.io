@@ -1,5 +1,7 @@
 ---
 layout: post
+comments: true
+comments: true
 title:  "Rancher - Adding my First Stack"
 date:   2016-02-12 02:58:39
 categories: rancher stack docker-compose gitlab

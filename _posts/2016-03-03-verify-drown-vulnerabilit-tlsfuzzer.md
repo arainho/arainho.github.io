@@ -1,5 +1,6 @@
 ---
 layout: post
+comments: true
 title:  "Verify DROWN vulnerability - tlsfuzzer"
 date:   2016-03-03 11:55
 categories: sslv2 drown verify tlsfuzzer openssl

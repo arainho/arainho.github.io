@@ -1,5 +1,6 @@
 ---
 layout: post
+comments: true
 title:  "Install Drush via composer"
 date:   2016-01-26  10:46:00
 categories: drush composer drupal

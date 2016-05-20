@@ -1,5 +1,6 @@
 ---
 layout: post
+comments: true
 title:  "GitLab - smtp settings"
 date:   2016-02-19 11:56:00
 categories: gitlab smtp settings

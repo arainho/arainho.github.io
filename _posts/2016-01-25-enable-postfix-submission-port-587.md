@@ -1,5 +1,6 @@
 ---
 layout: post
+comments: true
 title:  "Enable port 587 in postfix"
 date:   2016-01-25 13:35:00
 categories: postfix ubuntu starttls 587

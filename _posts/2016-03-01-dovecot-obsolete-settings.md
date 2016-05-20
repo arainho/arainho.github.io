@@ -1,5 +1,6 @@
 ---
 layout: post
+comments: true
 title:  "Dovecot Obsolete settings"
 date:   2016-03-10 13:30
 categories: dovecot upgrade obsolete-settings

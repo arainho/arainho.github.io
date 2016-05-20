@@ -1,5 +1,6 @@
 ---
 layout: post
+comments: true
 title:  "rsync failed with call trace"
 date:   2016-03-02 11:50
 categories: rsync call-trace ubuntu openldap

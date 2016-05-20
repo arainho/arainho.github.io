@@ -1,5 +1,6 @@
 ---
 layout: post
+comments: true
 title:  "ZFS Dataset not available at bootup"
 date:   2016-01-29 15:57:22
 categories: zfs boot arch-linux dataset

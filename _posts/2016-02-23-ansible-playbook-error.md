@@ -1,5 +1,6 @@
 ---
 layout: post
+comments: true
 title:  "Ansible playbook error - the field 'hosts' is required"
 date:   2016-02-23 10:48
 categories: ansible yml playbook error

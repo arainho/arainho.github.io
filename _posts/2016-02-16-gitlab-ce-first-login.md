@@ -1,5 +1,6 @@
 ---
 layout: post
+comments: true
 title:  "GitLab Community Edition - first steps"
 date:   2016-02-16 18:22:02
 categories: gitlab credentials

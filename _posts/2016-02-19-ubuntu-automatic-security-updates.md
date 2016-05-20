@@ -1,5 +1,6 @@
 ---
 layout: post
+comments: true
 title:  "Ubuntu - Provision Automatic Security Updates with Ansible"
 date:   2016-02-19 10:37:05
 categories: ubuntu security upgrade unattended-upgrades ansible

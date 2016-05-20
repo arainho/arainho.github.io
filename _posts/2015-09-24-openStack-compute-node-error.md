@@ -1,5 +1,6 @@
 ---
 layout: post
+comments: true
 title:  "OpenStack Compute node error"
 date:   2015-09-24 15:42:13
 categories: openstack compute linux ubuntu

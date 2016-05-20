@@ -1,5 +1,6 @@
 ---
 layout: post
+comments: true
 title:  "Upgrade Standalone Chef Server"
 date:   2016-03-01 11:36
 categories: chef chef-server upgrade

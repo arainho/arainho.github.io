@@ -1,5 +1,6 @@
 ---
 layout: post
+comments: true
 title:  "Can't start mysql - mysql respawning too fast, stopped"
 date:   2016-01-19 16:07:00
 categories: mysql linux ubuntu

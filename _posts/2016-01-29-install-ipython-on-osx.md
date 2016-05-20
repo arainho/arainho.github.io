@@ -1,5 +1,6 @@
 ---
 layout: post
+comments: true
 title:  "Install ipython on Mac OS X"
 date:   2016-01-29 12:04:19
 categories: osx python ipython pip

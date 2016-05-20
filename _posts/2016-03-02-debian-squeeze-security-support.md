@@ -1,5 +1,6 @@
 ---
 layout: post
+comments: true
 title:  "Debian Squeeze - Add Security Support"
 date:   2016-03-02 17:06
 categories: debian squeeze security lts

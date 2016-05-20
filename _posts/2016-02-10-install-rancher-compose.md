@@ -1,5 +1,6 @@
 ---
 layout: post
+comments: true
 title:  "Install rancher-compose on Arch Linux"
 date:   2016-02-10 19:16:00
 categories: rancher rancher-compose linux arch-linux

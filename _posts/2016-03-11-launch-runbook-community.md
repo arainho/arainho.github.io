@@ -1,5 +1,6 @@
 ---
 layout: post
+comments: true
 title:  "Launch RunBook Community"
 date:   2016-03-11 10:56
 categories: runbook containers linux

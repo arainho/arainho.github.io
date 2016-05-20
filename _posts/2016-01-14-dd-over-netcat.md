@@ -1,5 +1,6 @@
 ---
 layout: post
+comments: true
 title:  "Using dd over Netcat"
 date:   2016-01-14  15:19:00
 categories: netcat dd clone copy

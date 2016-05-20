@@ -1,5 +1,6 @@
 ---
 layout: post
+comments: true
 title:  "Enable securepages on Drupal"
 date:   2016-01-29 10:32
 categories: drupal drush securepages_enabled

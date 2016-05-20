@@ -1,5 +1,6 @@
 ---
 layout: post
+comments: true
 title:  "Runnning your own ELK stack on Rancher"
 date:   2016-02-25 07:18:39
 categories: ELK Rancher

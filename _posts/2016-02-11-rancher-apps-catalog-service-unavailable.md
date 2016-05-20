@@ -1,5 +1,6 @@
 ---
 layout: post
+comments: true
 title:  "Rancher Apps Catalog - 503 - service unavailable"
 date:   2016-02-11 8:48:00
 categories: rancher apps catalog docker dns service-unavailable

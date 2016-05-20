@@ -1,5 +1,6 @@
 ---
 layout: post
+comments: true
 title:  "Get package version on Debian/Ubuntu Systems"
 date:   2016-02-02 11:35:12
 categories: dpkg package version debian ubuntu linux

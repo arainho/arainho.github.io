@@ -1,5 +1,6 @@
 ---
 layout: post
+comments: true
 title:  "Update OpenSSH Client to version 7.1p2-1"
 date:   2016-01-15 09:32:02
 categories: openssh client linux osx freebsd

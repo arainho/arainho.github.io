@@ -1,5 +1,6 @@
 ---
 layout: post
+comments: true
 title:  "CUPS - print via samba"
 date:   2015-09-24 14:00:00
 categories: cups print archlinux

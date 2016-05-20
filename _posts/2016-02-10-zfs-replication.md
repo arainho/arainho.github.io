@@ -1,5 +1,6 @@
 ---
 layout: post
+comments: true
 title:  "ZFS replication"
 date:   2016-02-10  17:24:00
 categories: freebsd linux zfs replication

@@ -1,5 +1,6 @@
 ---
 layout: post
+comments: true
 title:  "Problem with NFS server lockd timed out on Debian linux "
 date:   2016-01-19 09:32:23
 categories: nfs linux debian

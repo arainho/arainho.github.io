@@ -1,5 +1,6 @@
 ---
 layout: post
+comments: true
 title:  "Check drupal version with drush"
 date:   2016-01-27 10:01
 categories: drush check-version drupal

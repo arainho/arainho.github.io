@@ -1,5 +1,6 @@
 ---
 layout: post
+comments: true
 title:  "No space left on device, /boot is full"
 date:   2016-02-03 15:51:03
 categories: linux kernel boot no-space

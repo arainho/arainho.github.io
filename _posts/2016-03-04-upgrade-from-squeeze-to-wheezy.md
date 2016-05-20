@@ -1,5 +1,6 @@
 ---
 layout: post
+comments: true
 title:  "Upgrading from Squeeze LTS to Wheezy LTS"
 date:   2016-03-04 14:32
 categories: upgrade debian squeeze wheezy

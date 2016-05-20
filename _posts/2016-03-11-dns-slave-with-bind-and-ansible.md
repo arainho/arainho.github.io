@@ -1,5 +1,6 @@
 ---
 layout: post
+comments: true
 title:  "DNS Slave with bind and Ansible"
 date:   2016-03-11 14:23
 categories: dns slave bind ansible linux
