@@ -11,3 +11,4 @@ permalink: /about/
 <br> • I Work as Linux System Administrator and Private Cloud Implementation at <a href="https://www.it.pt/ITSites/Index/3"> IT-Aveiro </a> an Institution in the Telecommunications field.
 
 mores details in [linkedin](http://www.linkedin.com/in/arainho)
+check my [CV] (https://github.com/arainho/arainho.github.io/blob/master/files/cv.pdf) 
