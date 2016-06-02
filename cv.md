@@ -1,7 +1,7 @@
 ---
 layout: page
-title: My Resumé
+title: CV
 permalink: /cv/
 ---
 
-check my [resumé] (https://github.com/arainho/arainho.github.io/blob/master/files/cv.pdf) 
+here is my [resumé](https://github.com/arainho/arainho.github.io/blob/master/files/cv.pdf) 
