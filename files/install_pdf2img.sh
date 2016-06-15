@@ -5,8 +5,7 @@ mkdir $HOME/bin
 cd $HOME/bin
 wget https://github.com/wifiextender/pdf2png/archive/master.zip -O pdf2png.zip
 unzip pdf2png.zip
-cd pdf2png
-chmod +x pdf2img.py
+chmod +x pdf2png/pdf2img.py
 echo "export PATH="$PATH:$HOME/bin/pdf2png"" >> $HOME/.bashrc
 bash -l
 
