@@ -8,6 +8,7 @@ unzip pdf2png.zip
 cd pdf2png
 chmod +x pdf2img.py
 echo "export PATH="$PATH:$HOME/bin/pdf2png"" >> $HOME/.bashrc
+bash -l
 
 # Install dependencies
 sudo zypper --non-interactive python-qt4-utils ghostscript
