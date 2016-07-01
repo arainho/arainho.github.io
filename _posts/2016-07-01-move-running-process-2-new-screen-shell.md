@@ -3,7 +3,7 @@ layout: post
 comments: true
 title:  "Move running process to new screen shell"
 date:   2016-07-01 09:34
-categories: running-process screen shell
+categories: running process screen shell
 ---
 
 In order to move a running process on your current shell to a new screen session.
