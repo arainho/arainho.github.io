@@ -1,5 +1,6 @@
 ---
 layout: post
+comments: true
 title:  "Move running process to new screen shell"
 date:   2016-07-01 09:34
 categories: running-process screen shell
