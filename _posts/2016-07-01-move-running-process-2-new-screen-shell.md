@@ -20,6 +20,7 @@ $ screen               # Launch screen
 $ reptyr $(pgrep htop) # Get back the process
 ```
 
+---
 [screen]: https://www.gnu.org/software/screen/
 [tmux]: https://tmux.github.io/
 [reptyr]: https://github.com/nelhage/reptyr
