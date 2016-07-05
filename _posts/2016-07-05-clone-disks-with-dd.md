@@ -5,7 +5,7 @@ date:   2016-07-05 11:51
 categories: clone disks dd dd_rescue
 ---
 
-Before clonning let's check the state our original disk _sda_ , see the _rw_ flag bellow RO.
+### 1. Before clonning let's check the state our original disk _sda_ , see the _rw_ flag bellow RO.
 
 ```sh
 # blockdev -v --getro /dev/sda
@@ -29,7 +29,8 @@ RO    RA   SSZ   BSZ   StartSec            Size   Device
 rw   256   512  4096       2048   1000203091968   /dev/sda1
 ```
 
-To lock property of device _sda_, this will set the device and partition to read-only mode
+### 2. Lock property of device _sda_, this will set the device and partition to read-only mode
+
 ```sh
 blockdev --setro /dev/sda
 blockdev --setro /dev/sda1
@@ -46,7 +47,7 @@ get read-only: 1
 ```
 
 
-Insert the clean device
+### Insert the clean device
 
 ```sh
 dmesg -T 
