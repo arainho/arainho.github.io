@@ -5,13 +5,29 @@ date:   2016-07-05 11:51
 categories: clone disks dd dd_rescue
 ---
 
-Before clonning let's check the state our original disk _sda_ 
+Before clonning let's check the state our original disk _sda_ , see the _rw_ flag bellow RO.
+
 ```sh
-# blockdev --report /dev/sda
-RO    RA   SSZ   BSZ   StartSec            Size   Device
-rw   256   512  4096          0   3000592982016   /dev/sda
+# blockdev -v --getro /dev/sda
+get read-only: 0
 ```
 
+```sh
+# blockdev -v --getro /dev/sda1
+get read-only: 0
+```
+
+```sh
+# blockdev --report  /dev/sda
+RO    RA   SSZ   BSZ   StartSec            Size   Device
+rw   256   512  4096          0   1000204886016   /dev/sda
+```
+
+```sh
+# blockdev --report  /dev/sda1
+RO    RA   SSZ   BSZ   StartSec            Size   Device
+rw   256   512  4096       2048   1000203091968   /dev/sda1
+```
 
 To lock property of device _sda_, this will set the device and partition to read-only mode
 ```sh
@@ -19,8 +35,19 @@ blockdev --setro /dev/sda
 blockdev --setro /dev/sda1
 ```
 
+```sh
+# blockdev -v --getro /dev/sda
+get read-only: 1
+```
+
+```sh
+# blockdev -v --getro /dev/sda1
+get read-only: 1
+```
+
 
 Insert the clean device
+
 ```sh
 dmesg -T 
 
@@ -28,18 +55,21 @@ dmesg -T
 [Tue Jul  5 13:13:41 2016] sd 5:0:0:0: [sdd] Attached SCSI disk
 ```
 
-Clone the devices with dd, 
+Clone the devices with dd
+
 ```sh
 dd status=progress if=/dev/sda /dev/sdc
 ```
 
 In my Arch Linux i have progress on _dd_.
+
 ```sh
 dd --version
 dd (coreutils) 8.25
 ```
 
-Other option is to use [dd_rescue], that has progress and other nice features for data recovery. 
+Other option is to use [dd_rescue], that has progress and other nice features for data recovery.
+
 ```sh
 dd_rescue /dev/sda /dev/sdc
 ```
