@@ -6,10 +6,7 @@ date:   2016-01-14  12:19:00
 categories: grub gpt arch-linux
 ---
 
-
-
-GPT partition tables do not have the limit of 4 primary partitions (unlike MBR) but requires an additional (small) partition to be able to boot from GNU GRUB. 
-Use mktable gpt to initialize a disk with a GPT partition table:
+GPT partition tables do not have the limit of 4 primary partitions (unlike MBR) but requires an additional (small) partition to be able to boot from GNU GRUB. Use mktable gpt to initialize a disk with a GPT partition table:
 
 <pre>
 (parted) mktable gpt
@@ -61,5 +58,8 @@ After this you can install GRUB with success
 Installing for i386-pc platform.
 Installation finished. No error reported
 
-https://github.com/voidlinux/documentation/wiki/Installer-Partitioning
-https://wiki.archlinux.org/index.php/GRUB#GUID_Partition_Table_.28GPT.29_specific_instructions
+You can check more info here [voidlinux] or [archlinux].
+
+---
+[voidlinux]: https://wiki.voidlinux.eu/Installer_Partitioning#BIOS_system_-_GPT
+[archlinux]: https://wiki.archlinux.org/index.php/GRUB#GUID_Partition_Table_.28GPT.29_specific_instructions
