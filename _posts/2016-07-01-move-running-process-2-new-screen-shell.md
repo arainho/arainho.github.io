@@ -7,7 +7,7 @@ categories: running process screen shell
 ---
 
 In order to move a running process on your current shell to a new screen session,
-you can use [reptyr] and [screen] or [tmux].
+you can use [reptyr] and [screen] or even [tmux].
 
 Imagine that your connected via ssh to a remote server and your current job is taking to long to complete ...
 or you forgot to open a tmux or a screen session and launch a long task ...
