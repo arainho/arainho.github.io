@@ -56,20 +56,21 @@ dmesg -T
 sudo dd status=progress if=/dev/sda /dev/sdc
 ```
 
-In my Arch Linux i have progress on _dd_i version .
+In my Arch Linux i have progress with _dd_ version 8.25,
 
 ```sh
 # dd --version
 dd (coreutils) 8.25
 ```
 
-Other option is to use [dd_rescue], that has progress and other nice features for data recovery.
+On some of Debian/Ubuntu or other Linux Distro the option is to use [dd_rescue], 
+that has progress and other nice features for data recovery.
 
 ```sh
 dd_rescue /dev/sda /dev/sdc
 ```
 
-After using [deft-linux] for some data recovery, i found that is possible to set devices in read only mode. You can check details in the here [deft-quickguide].
+After using [deftlinux] for some data recovery, i found that is possible to set devices in read only mode. You can check details in the here [deft-quickguide].
 
 
 [dd_rescue]: http://www.garloff.de/kurt/linux/ddrescue/
