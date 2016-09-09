@@ -76,9 +76,11 @@ openconnect --version
 ```
 
 ### manually
+Don't use the _--no-cert-check_ option it's insecure, ca-cert.pem file it's inside docker container in /opt/certs/ca-cert.pem.
+Thanks to [David Woodhouse] for reminding me this :-)
 
 ```sh
-sudo openconnect --no-cert-check --no-dtls server.example.com
+sudo openconnect --cafile=ca-cert.pem server.example.com
 ```
 
 ### automatically with a script
@@ -86,8 +88,13 @@ sudo openconnect --no-cert-check --no-dtls server.example.com
 ```sh
 MY_USER="my_username"
 MY_PASSWORD="my_password"
-echo -n ${MY_PASSWORD} | sudo openconnect --no-cert-check --no-dtls --background -u ${MY_USER} --passwd-on-stdin server.example.com
+echo -n ${MY_PASSWORD} | sudo openconnect --cafile=ca-cert.pem --background -u ${MY_USER} --passwd-on-stdin server.example.com
 ```
+
+### optional
+In case you have the following warning you can disable DTLS by adding the option _--no-dtls_
+_warning "DTLS handshake failed: Resource temporarily unavailable_
 
 ---
 [wppurking/ocserv-docker]: https://github.com/wppurking/ocserv-docker.git
+[David Woodhouse]: https://disqus.com/by/david_woodhouse/
