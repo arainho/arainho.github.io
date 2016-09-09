@@ -76,8 +76,9 @@ openconnect --version
 ```
 
 ### manually
-Don't use the _--no-cert-check_ option it's insecure, ca-cert.pem file it's inside docker container in /opt/certs/ca-cert.pem.
-Thanks to [David Woodhouse] for reminding me this :-)
+Don't use the _--no-cert-check_ option it's insecure, use _--cafile_ or _--servercert_ instead.
+The ca-cert.pem file it's inside docker container in /opt/certs/ca-cert.pem.
+_Thanks [David Woodhouse] for reminding me this :-)_
 
 ```sh
 sudo openconnect --cafile=ca-cert.pem server.example.com
