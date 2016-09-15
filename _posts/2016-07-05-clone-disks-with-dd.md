@@ -75,6 +75,18 @@ dmesg -T
 
 #### 4. Clone the devices with dd
 
+Used _device ids_ instead of sda, sdX, etc it's safer. :-)
+```sh
+ls -lh /dev/disk/by-id/* | grep -i kingston | awk '{ print $9}'
+/dev/disk/by-id/usb-Kingston_DT_HyperX_000000-0:0 -> ../../sde
+```
+
+option 1 ( safer )
+```sh
+sudo dd status=progress if=/dev/disk/by-id/usb-Kingston_DT_HyperX_0011100-0:0 /dev/disk/by-id/ata-Hitachi_HDT000_XXX
+```
+
+option 2 ( risky )
 ```sh
 sudo dd status=progress if=/dev/sdc /dev/sdg
 ```
