@@ -47,7 +47,9 @@ vi /etc/nginx/nginx.conf
 Let's Encrypt certificates last for 90 days, 
 so it's highly advisable to renew them automatically! 
 
-We test automatic renewal for our certificates by running this command:
+We can use _pre-hook_ and _post-hook_ to stop services before renewing the certificates and after,
+in this case i use _apache2_ but can be _nginx_.
+Let's test automatic renewal for our certificates by running this command:
 
 ```sh
 certbot-auto renew \
@@ -65,6 +67,8 @@ And finally add a line to cron, _auto-renew-certs.sh_ it's the previous command 
 # Let's Encrypt 
 0 3 1 * * root /usr/local/bin/auto-renew-certs.sh | mail -e -s "[Let's Encrypt] monthly renew certs" admin@example.com
 ```
+
+#### Some usefull links
 
 https://certbot.eff.org/
 https://certbot.eff.org/#ubuntuother-apache
