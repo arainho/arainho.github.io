@@ -17,7 +17,7 @@ Be extremly careful with dd, and triple check your devices names /dev/sdx  !!
 ### 1. On workstation
 Go to your workstation and run this, sdf is the destination disk
 
-    workstation ~# nc -l 9000 | dd of=/dev/sdf
+    workstation ~# nc -l -p 9000 | dd of=/dev/sdf
 
 ### 2. On the instance 
 On the instance do the following, the source disk is /dev/sda
