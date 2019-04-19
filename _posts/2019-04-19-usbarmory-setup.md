@@ -28,16 +28,12 @@ Now you can log in with
 ssh 10.0.0.1 -l usbarmory
 ```
 
-### 2. Setup
+### 3. Additional setup
 Create a ssh key pair, and sent it to usbarmory
 ```
 ssh-keygen -t rsa -b 4096 -C "usbarmory key"
 ssh-copy-id -i $HOME/.ssh/id_rsa_usbarmory usbarmory@10.0.0.1
 ```
-
-### Create Ansible Playbook to deploy 
-in progress
-
 
 ### Notes
 You need the `RNDIS/Ethernet Gadget` interface in the macOS Network Preferences.
