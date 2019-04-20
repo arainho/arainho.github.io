@@ -12,7 +12,7 @@ I choose a Samsung microSD and a pre-compiled release of Debian stretch image av
 ### 2. Connect to usbarmory
 We have to options to connect with the usbarmory device, via serial or ssh .
 
-##### Option 1 - serial interface
+#### Option 1 - serial interface
 We can connect to usbarmory serial port through a USB to TTL cable, the breakout header can be accessed as, the breakout header can be accessed as described in [gpio page](https://github.com/inversepath/usbarmory/wiki/GPIOs).
 
 I solder a header in usbarmory and use pins 1,5,6 to connect 'usb to ttl' adapter with silicon CP210x chipset and specific [drivers](https://www.silabs.com/products/development-tools/software/usb-to-uart-bridge-vcp-drivers).
@@ -21,7 +21,7 @@ To connect in macOS use the next command:
 screen /dev/tty.SLAB_USBtoUART 115200
 ```
 
-##### Option 2 - ssh connection
+#### Option 2 - ssh connection
 In this image `usbarmory-debian-base_image` usbarmory cames with predefined ipv4 address `10.0.0.1`, so set the laptop or workstation ip address to `10.0.0.2` and connect to your usbarmory. 
 
 Now we can log in with
