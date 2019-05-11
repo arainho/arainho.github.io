@@ -8,6 +8,11 @@ url: "http://blog.arainho.me" # the base hostname & protocol for your site
 github_username:  arainho
 #twitter_username: arainho_it
 
+comments:
+  provider               : "disqus"
+  disqus:
+    shortname            : arainho
+
 # Build settings
 markdown: kramdown
 
