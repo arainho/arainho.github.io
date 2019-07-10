@@ -7,7 +7,12 @@ So I decided to do 3 things
 2. disable the ability for Zoom to turn on your webcam when joining a meeting
 3. shut down and prevent this server from being restored after updates
 
-You can use this find all the zoom files and folders in your machine, and complete the public gist.
+To confirm if this server is present run this in your terminal.
+```
+lsof -i :19421 
+```
+
+You can use this find commands to search all zoom files and folders in your machine, and complete the public gist.
 
 find all files
 ```
