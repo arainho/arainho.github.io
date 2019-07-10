@@ -75,4 +75,4 @@ echo "Switching to a user with sudo privileges to remove more zoom things..."
   sudo rm -fr -- /Library/LaunchDaemons/us.zoom.rooms.daemon.plist
   sudo rm -fr -- /Library/LaunchAgents/us.zoom*
 }
-
+```
