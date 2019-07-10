@@ -65,7 +65,7 @@ echo "Removing Launch Daemons/Agents and Internet Plug-Ins..."
   rm -fr -- ~/Library/Internet\ Plug-Ins/ZoomUsPlugIn.plugin/
 }
 
-echo "Switching to a user with sudo privileges..."
+echo "Switching to a user with sudo privileges to remove more zoom things..."
 {
   sudo rm -fr -- /Applications/zoom.us.app
   sudo kextunload -b zoom.us.ZoomAudioDevice
