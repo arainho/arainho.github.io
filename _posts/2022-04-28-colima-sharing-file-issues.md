@@ -1,6 +1,6 @@
 ### Introduction
-After Docker Desktop changed its new licensing schema, some people went after alternatives such as a Linux VM with docker daemon inside, minikube, Rancher Desktop, Colima
-I tried them all and end up in colima after issues with sharing folders/files between host and containers and also port forwarding.
+After Docker Desktop changed its new licensing schema, some people went after alternatives such as a Linux VM with docker daemon inside, minikube, Rancher Desktop, Colima.     
+I tried them all and end up in colima after issues with sharing folders/files between host and containers and also port forwarding.   
 
 "Now let me show you what happens when I share a file from /tmp/file to a docker container with colima ..."
 
