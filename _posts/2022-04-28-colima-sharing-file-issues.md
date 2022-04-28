@@ -60,7 +60,7 @@ colima ssh exec ls /tmp/config.yaml && echo $?
 
 ### Possible solutions
 
-*Delete the directory I need to remove it manually*
+*Delete the directory manually*
 ```bash
 colima ssh exec sudo rmdir /tmp/config.yaml
 ```
