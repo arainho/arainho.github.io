@@ -44,8 +44,8 @@ Also if we want to share our internet access with the usbarmory device
 - in macOS Monterey set ip address of `CDC Composite Gadget` interface to `10.0.0.2`
 - finally set `Enable Internet Sharing` to ON in System Preferences
 
-#### on some macOS version
-WE may need to
+#### on other macOS versions
+In some case we may need to
 - have `RNDIS/Ethernet Gadget` interface in the Network Preferences
 - Set usbmory ip to `192.168.2.X/24` and gateway `192.168.2.1`
 - Set ip address of `RNDIS/Ethernet Gadget` interface to `192.168.2.1`
