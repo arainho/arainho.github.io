@@ -59,9 +59,10 @@ colima ssh exec ls /tmp/config.yaml && echo $?
 ```
 
 ### Solution
-Only two host directories are available to the Linux VM and Docker containers: $HOME and /tmp/colima. [issue#267](https://github.com/abiosoft/colima/issues/267)
+29April - I open a [issue#267](https://github.com/abiosoft/colima/issues/267) in colima github repository and receive a response.
 
-*To solve it use /tmp/colima instead of /tmp*
+Only two host directories are available to the Linux VM and Docker containers: $HOME and /tmp/colima. 
+I need to use `/tmp/colima/file` instead of `/tmp/file` and after that, I'm able to share a file from host to container.
 ```bash
 docker run -it --rm -v /tmp/config.yaml:/opt/config.yaml alpine /bin/sh -c "test -d /opt/config.yaml && echo it\'s a directory"
 ```
