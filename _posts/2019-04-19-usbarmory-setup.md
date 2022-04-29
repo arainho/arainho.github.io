@@ -37,9 +37,17 @@ ssh-copy-id -i $HOME/.ssh/id_rsa_usbarmory usbarmory@10.0.0.1
 ```
 
 ### Notes
-WE need the `RNDIS/Ethernet Gadget` interface in the macOS Network Preferences.
+
+*macOS Monterey*
+WE need the `CDC Composite Gadget` interface in the macOS Network Preferences.
 
 Also if we want to share our internet access with the usbarmory device
-- set usbmory ip to `192.168.2.X/24` and gateway `192.168.2.1`
-- in macOS set ip address of `RNDIS/Ethernet Gadget` interface to `192.168.2.1`
+- in macOS Monterey set ip address of `CDC Composite Gadget` interface to `10.0.0.2`
+- finally set `Enable Internet Sharing` to ON in System Preferences
+
+*on some macOS version*
+WE may need to
+- have `RNDIS/Ethernet Gadget` interface in the Network Preferences
+- Set usbmory ip to `192.168.2.X/24` and gateway `192.168.2.1`
+- Set ip address of `RNDIS/Ethernet Gadget` interface to `192.168.2.1`
 - finally set `Enable Internet Sharing` to ON in System Preferences
