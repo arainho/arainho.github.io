@@ -1,10 +1,10 @@
 ### Introduction
-After Docker Desktop changed its new licensing schema, some people went after alternatives such as a Linux VM with docker daemon inside, minikube, Rancher Desktop, Colima.     
-I tried them all and end up in colima after issues with sharing folders/files between host and containers and also port forwarding.   
+After Docker Desktop changed its new licensing schema, some people went after alternatives such as a Linux VM with docker daemon inside, minikube, Rancher Desktop, and Colima.     
+I tried them all and end up in Colima after issues with sharing folders/files between host and containers and also port forwarding.   
 
-"Now let me show you what happens when I share a file from /tmp/file to a docker container with colima ..."
+"Now let me show you what happens when I share a file from `/tmp/file` to a docker container with Colima ..."
 
-It’s 28April and I'm using:
+It’s 28th April and I'm using the following software versions:
 ```bash
 docker client version: 20.10.12
 colima version: 0.3.4
@@ -59,9 +59,9 @@ colima ssh exec ls /tmp/config.yaml && echo $?
 ```
 
 ### Solution
-29April - I open a [issue#267](https://github.com/abiosoft/colima/issues/267) in colima github repository and receive a response.
+It’s 29th April and I open a [issue#267](https://github.com/abiosoft/colima/issues/267) in the Colima GitHub repository and receive a response.
 
-Only two host directories are available to the Linux VM and Docker containers: $HOME and /tmp/colima. 
+Only two host directories are available to the Linux VM and Docker containers: $HOME and `/tmp/colima`. 
 I need to use `/tmp/colima/file` instead of `/tmp/file` and after that, I'm able to share a file from host to container.
 ```bash
 docker run -it --rm -v /tmp/config.yaml:/opt/config.yaml alpine /bin/sh -c "test -d /opt/config.yaml && echo it\'s a directory"
