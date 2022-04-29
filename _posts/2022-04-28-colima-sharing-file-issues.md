@@ -58,16 +58,12 @@ colima start
 colima ssh exec ls /tmp/config.yaml && echo $?
 ```
 
-### Possible solutions
+### Solution
+Only two host directories are available to the Linux VM and Docker containers: $HOME and /tmp/colima. [issue#267](https://github.com/abiosoft/colima/issues/267)
 
-*Delete the directory manually*
+*To solve it use /tmp/colima instead of /tmp*
 ```bash
-colima ssh exec sudo rmdir /tmp/config.yaml
+docker run -it --rm -v /tmp/config.yaml:/opt/config.yaml alpine /bin/sh -c "test -d /opt/config.yaml && echo it\'s a directory"
 ```
 
-*Or as a latest resource delete colima Linux VM  ...*
-```bash
-colima delete 
-```
 
-I may end up buying Docker Desktop … or get back to a Linux VM with docker daemon inside.
